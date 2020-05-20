@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>occuhunt.com</title>
+
+</head>
+<body>
+    <div class="site-container">
+        <header>
+            <div class="logo">
+                <!-- <img src="" alt=""> -->
+            </div> 
+            <div class="search-wrapper">
+                <form action="" class="search-form" id="search-form">
+                    <div class="search-col-1 search-col">
+                        <label for="search">What</label>
+                        <span class="input-desc">Job title or keywords...</span>
+                        <input type="text" class="form-control" placeholder="Full Stack Developer" id="search">
+                    </div>
+                    <div class="search-col-2 search-col">
+                        <label for="search">Where</label>
+                        <span class="input-desc">City or state...</span>
+                        <input type="text" class="form-control" placeholder="London" id="location">
+                    </div>
+                    <div class="search-col-3 search-col">
+                        <button class="btn search-btn">find jobs</button>
+                    </div>
+                </form>
+            </div>
+        </header>
+        <main>
+            <div class="pane-container">
+                <div class="sresults-wrapper pwrapper">
+                    <div class="loading-element hide">
+                        <img src="./assets/refresh-spinner.svg">
+                        <span>Searching...</span>
+                    </div>
+                    <div class="search-results">
+
+                        <div class="sresults-row">
+                            <div class="sresults-col-1 sresults-col">
+                                <div class="c-logo">
+                                    <img src="./assets/logo-amazon.svg" alt="logo">
+                                </div>
+                            </div>
+                            <div class="sresults-col-2 sresults-col">
+                                <div class="company">Amazon</div>
+                                <span class="fav-icon"><img src="./assets/fav-heart.png"></span>
+                                <div class="role">Full-Stack Developer</div>
+                                <div class="location">London</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="preview-wrapper pwrapper">
+                    <div class="preview flex-item"></div>
+                    <div class="preview flex-item"></div>
+                </div>
+            </div>
+        </main>
+        <!-- <script src="./app.js"></script>
+        <script src="./Models/JobSearch.js"></script>
+        <script src="./Views/jobSearchView.js"></script> -->
+
+    </div><!-- ./body-container -->
+    
+</body>
+</html> 

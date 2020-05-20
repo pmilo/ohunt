@@ -1,0 +1,264 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.site-container {
+    height: 100vh;
+    min-width: 1282px;
+    max-width: 1282px;
+    background-color: azure;
+    margin: 0 auto;
+}
+
+
+
+/* ========================================================================== */
+/* HEADER */
+/* ========================================================================== */
+
+
+header {
+    height: 180px;
+    width: 100%;
+    margin-bottom: 4em;
+}
+
+.search-wrapper {
+    min-width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.search-form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-col {
+    /* width: 100%; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* padding: 0 1em; */
+    /* margin: 0 1em; */
+
+}
+
+.input-desc, .form-control {
+    font-size: .8rem;
+}
+
+.form-control {
+    padding-left: 1em;
+}
+
+.search-col-1 {
+    /* background-color: beige; */
+    width: 40%;
+
+}
+
+.search-col-2 {
+    /* background-color: rgb(123, 184, 253); */
+    width: 40%;
+}
+
+.search-col-3 {
+    /* background-color: lightpink; */
+    width: 15%;
+
+}
+
+.input-desc {
+    color: #707070;
+    margin: .2em 0 1em 0;
+}
+
+label {
+    font-weight: bold;
+    color: #193FFF;
+}
+
+.form-control {
+    background-color: #EDF1F8;
+    color: #AFAFAF;
+    width: 100%;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+}
+
+
+.search-btn {
+    font-size: .68rem;
+    letter-spacing: .15rem;
+    font-weight: bold;
+    height: 35px;
+    color: #fff;
+    background-color: #193FFF;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    margin-top: 4.8em;
+}
+
+
+/* ========================================================================== */
+/* SEARCH RESULTS PANE */
+/* ========================================================================== */
+
+
+.pane-container {
+    max-width: 100%;
+    min-width: 100%;
+    
+    z-index: 1;
+    display: flex; 
+}
+
+.pwrapper {
+    min-height: 889px;
+    max-height: 889px;
+    background-color: #EDF1F8;
+    border-radius: 5px;
+}
+
+.sresults-wrapper { 
+    max-width: 35%;
+    min-width: 35%;
+    margin-right: .9em;    
+}
+
+.loading-element {
+    margin: .7em;
+    float: left;    
+    display: flex;
+    align-items: center;
+    font-size: .9rem;
+}
+
+.loading-element img {
+    max-width: 27px;
+    margin-right: .5em;
+
+    /* transition: all .6s ease-in-out; */
+    animation: rotate .7s infinite linear;
+    transform: rotate(360deg);
+}
+
+@keyframes rotate {
+    0% {
+      transform: rotate(0); }
+    100% {
+      transform: rotate(360deg); } }
+
+
+.hide {
+    display: none;
+}
+
+.search-results {
+height: 100%;
+/* overflow: scroll; */
+}
+
+.sresults-row { 
+    max-width: 420px;
+    min-width: 420px;
+    height: 9%;
+    background-color: #fff;
+    margin: .9em;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.sresults-col-1 {
+    /* background-color: aqua; */
+    width: 25%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-logo img {
+    max-width: 37px;
+}
+
+.sresults-col-2 {
+    /* background-color: aquamarine; */
+    font-size: .8rem;
+    width: 75%;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    
+}
+
+.fav-icon {
+    position: absolute;
+    top: -5px;
+    left: 289px
+}
+
+.company {
+    font-weight: bold;
+}
+
+.role {
+    padding: .2em 0;
+}
+
+
+
+
+
+
+/* ========================================================================== */
+/* PREVIEW PANE */
+/* ========================================================================== */
+
+
+.preview-wrapper {
+    max-width: 65%;
+    min-width: 65%;
+}
+
+.preview {
+    max-width: 799.5px;
+    min-width: 799.5px;
+    min-height: 857px;
+    max-height: 857px; 
+    background-color: #fff;
+    margin: 1em 1em;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+

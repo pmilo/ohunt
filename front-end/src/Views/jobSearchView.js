@@ -1,22 +1,24 @@
-import JobSearch from '../Models/JobSearch';
-import * as jobSearchView from '../Views/jobSearchView';
+// import JobSearch from '../Models/JobSearch';
+import { elements, elementStrings } from './base';
 
 
 export const renderJob = (job, currency) => { 
 const markup =  `
+
     <div class="sresults-row data-id="${job.id}">
-        <div class="sresults-col-1 sresults-col">
-            <div class="c-logo">
-                <img src="./src/assets/logo-amazon.svg" alt="logo">
-            </div>
-        </div>
-        <div class="sresults-col-2 sresults-col">
-            <div class="company">${job.company.display_name}</div>
-            <span class="fav-icon"><img src="./src/assets/fav-heart.png"></span>
-            <div class="role">${job.title}</div>
-            <div class="location">${job.location.display_name}</div>
+    <div class="sresults-col-1 sresults-col">
+        <div class="c-logo">
+            <img src="./assets/logo-amazon.svg" alt="logo">
         </div>
     </div>
+    <div class="sresults-col-2 sresults-col">
+        <div class="status"><i class="fas fa-binoculars"></i><i class="fas fa-fire-alt"></i></div>
+        <div class="role">${job.title}</div>
+        <div class="company-location">${job.company.display_name}, ${job.location.area[1]}</div>
+        <div class="salary">${currency}${job.salary_min} - ${currency}${job.salary_max}</div>                               
+    </div>
+    </div>
+
 `;
 
 return markup;

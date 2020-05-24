@@ -1,3 +1,18 @@
+:root {
+    --signature: #193FFF;
+    --highlight: rgb(230, 233, 255);
+    --pri-txt: #5a5a5a;
+    --sec-txt: #8f8e8e;
+
+    /* --main-padding: 15px;  */
+}
+
+
+
+
+
+
+
 * {
     box-sizing: border-box;
 }
@@ -17,7 +32,7 @@ body {
     height: 100vh;
     min-width: 1282px;
     max-width: 1282px;
-    background-color: azure;
+    /* background-color: azure; */
     margin: 0 auto;
 }
 
@@ -95,7 +110,7 @@ header {
 
 label {
     font-weight: bold;
-    color: #193FFF;
+    color: var(--signature);
 }
 
 .form-control {
@@ -114,7 +129,7 @@ label {
     font-weight: bold;
     height: 35px;
     color: #fff;
-    background-color: #193FFF;
+    background-color: var(--signature);
     border: none;
     border-radius: 5px;
     text-transform: uppercase;
@@ -184,12 +199,19 @@ height: 100%;
 .sresults-row { 
     max-width: 420px;
     min-width: 420px;
-    height: 9%;
+    height: 12%;
     background-color: #fff;
     margin: .9em;
     border-radius: 5px;
     display: flex;
     align-items: center;
+    padding: 1em;
+}
+
+.sresults-row:hover {
+    /* background-color: var(--highlight); */
+    color: #fff;
+    border: 3px solid var(--highlight);
 }
 
 .sresults-col-1 {
@@ -199,6 +221,13 @@ height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.c-logo {
+    background-color: rgb(249, 250, 254);
+    padding: .6rem;
+    border-radius: .3rem;
+
+    display: flex;
 }
 
 .c-logo img {
@@ -218,22 +247,46 @@ height: 100%;
     
 }
 
-.fav-icon {
+.status {
     position: absolute;
-    top: -5px;
-    left: 289px
+    top: -15px;
+    left: 251px; 
+    /* max-width: 15px; */
+    display: flex;
+    justify-content: flex-end;
+
+    
 }
 
-.company {
-    font-weight: bold;
+.status i {
+    color: var(--highlight);
+    display: flex;
+    align-items: flex-end;
+    margin-left: .7em;
+    /* float: right; */
+    /* width: 100%; */
+
+}
+
+.status i:hover {
+    color: var(--signature);
+}
+
+.company-location {
+    /* font-weight: bold; */
+    color: var(--sec-txt);
+
 }
 
 .role {
-    padding: .2em 0;
+    /* padding: .2em 0; */
+    color: var(--pri-txt);
+    font-weight: bold;
 }
 
-
-
+.salary {
+    color: var(--signature);
+}
 
 
 

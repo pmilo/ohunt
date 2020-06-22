@@ -62,5 +62,5 @@ const server = createServer((req, res) => {
 const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => {
-    console.log(chalk.green(`Server listening on PORT ${PORT}...`));
+    console.log(chalk.blue(`Server listening on PORT ${PORT}...`));
 })

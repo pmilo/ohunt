@@ -8,14 +8,14 @@ const markup =  `
     <div class="sresults-row data-id="${job.id}">
     <div class="sresults-col-1 sresults-col">
         <div class="c-logo">
-            <img src="./assets/logo-amazon.svg" alt="logo">
+            <img src="./imgs/logo-amazon.0689ff3ccc259fd0989fad846adfb4ec.svg" alt="logo">
         </div>
     </div>
     <div class="sresults-col-2 sresults-col">
         <div class="status"><i class="fas fa-binoculars"></i><i class="fas fa-fire-alt"></i></div>
-        <div class="role">${job.title}</div>
-        <div class="company-location">${job.company.display_name}, ${job.location.area[1]}</div>
-        <div class="salary">${currency}${job.salary_min} - ${currency}${job.salary_max}</div>                               
+        <div class="role"><span>${job.title}</span></div>
+        <div class="company-location"><strong>${job.company.display_name}</strong>, ${job.location.area[1]}</div>
+        <div class="salary">${currency}${job.salary_max}</div>                               
     </div>
     </div>
 
@@ -23,10 +23,43 @@ const markup =  `
 
 return markup;
 
-console.log('job:');
-console.log(job);
-
 }
+
+export const updatePreview = (job, currency, elements) => {
+    const { previewHeader, posted, previewTitle, previewTxt } = elements;
+    const markup = `
+    <div class="preview-header">
+        <span class="i-wrapper"><i class="fas fa-binoculars"></i></span>
+        <span class="i-wrapper"><i class="fas fa-fire-alt"></i></span>
+    </div>
+    <div class="posted">NDFGDFGDFGDFGFDG</div>
+    <div class="preview-body">
+        <h1 class="preview-title">Job Summary</h1>
+        <p class="preview-txt>${previewTxt.innerText}</p>
+    </div> 
+    </div>
+    `
+    return markup;
+
+    // previewHeader.innerText = job. 
+    // posted.innerText = job.
+    // previewTitle.innerText = job.
+    // previewTxt.innerText = job.
+    
+}
+
+
+
+
+export const formatJob = job => {
+    // format job title
+    //format location
+    // format salary no.
+}
+
+
+
+
 
 
 // export const addFindBtnListener = btn => {

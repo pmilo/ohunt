@@ -54,6 +54,13 @@ export default class JobSearch {
     }
 
 
+    // syncLocalStorage = stateObj => {
+    //     // create a copy of state 
+    //     const obj = {...stateObj};
+    //     // see fnyn.io
+    // }
+    
+
 
     // configureFormListener() {
     //     this.searchForm.addEventListener('submit', e => {

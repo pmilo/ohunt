@@ -2,6 +2,14 @@ import "./styles.css";
 
 import JobSearch from './Models/JobSearch';
 import * as jobSearchView from './Views/jobSearchView';
+import { elements, domStrings } from './Views/base';
+
+
+//TODO: push search results to state
+    //search state for sresults id & pass into renderPrewview function update preview job info.
+
+//TODO: push input search criteria to state with a unique id  
+//TODO: push search viewed to state
 
 
 
@@ -9,7 +17,31 @@ import * as jobSearchView from './Views/jobSearchView';
 // APP INIT
 // =============================================================================
 
-const state = {};
+const state = {
+    search: {
+        keyword: "",
+        location: ""
+    },
+    results: {},
+
+    viewed: {   
+        id: "",
+        job: {}
+    },
+    watching: {
+        id: "",
+        job: {}
+    },
+    applied: {    
+        id: "",
+        job: {}
+    },
+    archived: {
+        id: "",
+        job: {}
+    }
+};
+
 window.state = state;
 
 
@@ -25,15 +57,12 @@ state.JobSearch.setCountryCode();
 
 // add search listener
 
-// jobSearchView.addFindBtnListener(state.JobSearch.findBtn);
-
-
 const controlSearch = () => {
 
     
     // clear DOM search inputs 
     
-    // clear search resukts
+    // clear search results
     jobSearchView.clearSearchResults();
     
     // start loading animation
@@ -56,18 +85,43 @@ const controlSearch = () => {
 
             // remove loading animation
             jobSearchView.stopLoading();
-            console.log('state:');
-            console.log(state);
+
+            
+            results.forEach(job => {
+                // console.log('job');
+                // console.log(job);
+                
+                // state.results["id"] = job.id;
+                state.results[`job-${job.id}`] = job;  
+            })
+
             return results
                 // for each results object, run renderJob(); 
-                .map(job => jobSearchView.renderJob(job, state.JobSearch.currencySymbol))
+                .map(job => 
+                    jobSearchView.renderJob(job, state.JobSearch.currencySymbol)
+                )
                 .join('');
         })
         // update DOM with results
         .then(jobs => {
             state.JobSearch.resultsContainer.innerHTML = jobs;
             state.JobSearch.resultsContainer.style.overflow = "scroll";
+       
+            // add listeners to rendered job rows
+            const sresults = [...document.querySelectorAll(domStrings.sresultsRow)];
 
+            sresults.forEach(jobRow => {
+                jobRow.addEventListener('click', e => {
+            
+                    console.log('e.currentTarget');
+                    console.log(e.currentTarget);
+
+                    console.log('elements');
+                    console.log(elements);
+                    
+                    jobSearchView.updatePreview(e.currentTarget, '£', elements);
+                })
+            });
         })
         
         // if error, stop loading animation
@@ -86,7 +140,11 @@ state.JobSearch.findBtn.addEventListener('click', e => {
 // JOB CONTROLLER
 // =============================================================================
 
-// select first job ad
+// get jobs from seatch results & convert to array
+
+//loop through sresults array & attach event listener(s)
+
+
 
 // =============================================================================
 // WATCH CONTROLLER

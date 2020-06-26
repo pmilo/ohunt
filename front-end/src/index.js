@@ -59,7 +59,6 @@ state.JobSearch.setCountryCode();
 
 const controlSearch = () => {
 
-    
     // clear DOM search inputs 
     
     // clear search results
@@ -86,11 +85,8 @@ const controlSearch = () => {
             // remove loading animation
             jobSearchView.stopLoading();
 
-            
-            results.forEach(job => {
-                // console.log('job');
-                // console.log(job);
-                
+            // add search results to state
+            results.forEach(job => {             
                 // state.results["id"] = job.id;
                 state.results[`job-${job.id}`] = job;  
             })
@@ -106,20 +102,16 @@ const controlSearch = () => {
         .then(jobs => {
             state.JobSearch.resultsContainer.innerHTML = jobs;
             state.JobSearch.resultsContainer.style.overflow = "scroll";
-       
-            // add listeners to rendered job rows
+            
+            // convert sresults to array
             const sresults = [...document.querySelectorAll(domStrings.sresultsRow)];
-
+            
+            // add listeners to rendered job rows
             sresults.forEach(jobRow => {
                 jobRow.addEventListener('click', e => {
-            
-                    console.log('e.currentTarget');
-                    console.log(e.currentTarget);
 
-                    console.log('elements');
-                    console.log(elements);
-                    
-                    jobSearchView.updatePreview(e.currentTarget, '£', elements);
+                    const matchedJob = state.JobSearch.getJob(state.results, e.currentTarget.dataset.id);                
+                    jobSearchView.updatePreview(matchedJob, '£', elements);
                 })
             });
         })

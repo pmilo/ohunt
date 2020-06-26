@@ -54,6 +54,31 @@ export default class JobSearch {
     }
 
 
+    // updateState(jobsArr, targetObjStr){
+    //     jobsArr.forEach(job => {             
+    //         // state.results["id"] = job.id;
+    //         state.targetObjStr[`job-${job.id}`] = job;
+    //     });
+    // }
+
+    // getJob(stateObj, id) {
+    //     stateObj.forEach(job => {
+    //         if (job.id == id) {
+    //             return job;
+    //         } else {console.log('cant find object!')}
+    //     })
+    // }
+
+    getJob(stateObj, id) {
+        for (const [key, value] of Object.entries(stateObj)) {
+            if (value.id == id) {
+                return value;
+            } else {
+                console.log('cant find job');  
+            }
+       }
+    }
+
     // syncLocalStorage = stateObj => {
     //     // create a copy of state 
     //     const obj = {...stateObj};
@@ -87,5 +112,4 @@ export default class JobSearch {
     //     });
     // }
 
-    
 }

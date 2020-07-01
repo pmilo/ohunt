@@ -94,7 +94,7 @@ const controlSearch = () => {
             return results
                 // for each results object, run renderJob(); 
                 .map(job => 
-                    jobSearchView.renderJob(job, state.JobSearch.currencySymbol)
+                    jobSearchView.renderJob(jobSearchView.formatJob(job), state.JobSearch.currencySymbol)
                 )
                 .join('');
         })

@@ -3,6 +3,8 @@ import { elements, elementStrings } from './base';
 
 
 export const renderJob = (job, currency) => { 
+// const { id, title, company, location, salary_max} = job;
+
 const markup =  `
 
     <div class="sresults-row" data-id=${job.id}>
@@ -40,63 +42,35 @@ export const updatePreview = (job, currency, elements) => {
     `
     // return markup;
 
-    // previewHeader.innerText 
-    posted.innerText = job.created;
-    // previewTitle.innerText = job.
+    // previewHeader.innerHTML
+    // previewTitle.innerHTML
+    posted.innerHTML = job.created;
     previewTxt.innerHTML = job.description;
     
 }
 
+const formatSalary = number => {
+    const newNum = Math.round(number / 100) * 100 / 1000;
+    const numStr = `${newNum}K`;
+    return numStr;
+}
+
+
 
 export const formatJob = job => {
+
     // format job title
-    // format location
+
+    //format company
+    if (!job.company.display_name) { job.company.display_name = ""; }
+    //format location
+    if (!job.location.area[1]) { job.location.area[1] = ""; }
     // format salary no.
+    job.salary_max = formatSalary(job.salary_max).toString();
+ 
+    return job;
 }
 
-
-const calcDays = (currDate, datePosted) => {
-    // TODO: write calc days ago function
-}
-
-
-
-// export const addFindBtnListener = btn => {
-//     btn.addEventListener('click', e => {
-//         // prevent page reload
-//         event.preventDefault();
-//         // clear search resukts
-//         jobSearchView.clearSearchResults();
-        
-//         // get search & location input field values
-//         const { search, location } = state.JobSearch.extractFormData(state.JobSearch.searchForm);
-//         // build url 
-//         const targetURL = `http://localhost:5000/?search=${search}&location=${location}&country=${state.JobSearch.countryCode}`;
-//         console.log('targetURL:');
-//         console.log(targetURL);
-        
-//         // query API with url with fetch using api server address (localhost)
-//         fetch(`http://localhost:5000/?search=${search}&location=${location}&country=${state.JobSearch.countryCode}`)
-//             .then(response => response.json())
-//             .then(({ results }) => {
-
-//                 console.log('results:');
-//                 console.log(results);
-
-//                 // remove loading animation
-//                 jobSearchView.stopLoading();
-//                 return results
-//                     // for each results object, run renderJob(); 
-//                     .map(job => renderJob(job, this.currencySymbol))
-//                     .join('')
-//             })
-//             // update DOM with results
-//             .then(jobs => this.resultsContainer.innerHTML = jobs)
-//             // if error, stop loading animation
-//             .catch(() => jobSearchView.stopLoading());
-//     });
-    
-// }
 
 export const clearSearchResults = () => {
     state.JobSearch.resultsContainer.innerHTML = "";

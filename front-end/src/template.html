@@ -10,9 +10,9 @@
 <body>
     <div class="site-container">
         <header>
-            <div class="logo">
-                <!-- <img src="" alt=""> -->
-            </div> 
+            <!-- <div class="logo">
+                <img src="" alt="">
+            </div>  -->
             <div class="search-wrapper">
                 <form action="" class="search-form" id="search-form">
                     <div class="search-col-1 search-col">
@@ -26,53 +26,153 @@
                         <input type="text" class="form-control" placeholder="London" id="location">
                     </div>
                     <div class="search-col-3 search-col">
-                        <button class="btn search-btn">find jobs</button>
+                        <button class="search-btn">find jobs</button>
                     </div>
                 </form>
             </div>
         </header>
         <main>
             <div class="pane-container">
-                <div class="sresults-wrapper pwrapper">
+                <!-- <div class="sresults-wrapper pwrapper"> -->
+                    
+                    <nav class="main-nav">
+                        <div class="main-nav-wrapper">
+
+                            <div class="main-nav-row saved-jobs">
+                                <span class="heading"><i class="far fa-star"></i>Saved Jobs</span>
+                                <span class="count">0</span>
+                            </div>
+                    
+                            <div class="main-nav-row applied">
+                                <span class="heading"><i class="fas fa-check"></i>Applied</span>
+                                <span class="count">0</span>
+                            </div>
+                    
+                            <div class="main-nav-row archived">
+                                <span class="heading"><i class="far fa-folder"></i>Archived</span>
+                                <span class="count">0</span>
+                            </div>
+
+                        </div>
+                    </nav>
+
                     <div class="loading-element hide">
-                        <img src="./assets/refresh-spinner.svg">
+                        <div class="spinner">
+                            <i class="fas fa-circle-notch"></i>
+                        </div>
                         <span>Searching...</span>
                     </div>
+
                     <div class="search-results">
 
                         <div class="sresults-row">
-                            <div class="sresults-col-1 sresults-col">
-                                <div class="c-logo">
-                                    <img src="./assets/logo-amazon.svg" alt="logo">
-                                </div>
+                            <span class="c-logo logo">
+                                <img src="./assets/logo-amazon.svg" alt="logo">
+                            </span>
+                            <div class="pri-row">
+                                <span class="role">Full-Stack Developer</span>
+                                <span class="salary">£30K</span>                               
                             </div>
-                            <div class="sresults-col-2 sresults-col">
-                                <div class="status"><i class="fas fa-binoculars"></i><i class="fas fa-fire-alt"></i></div>
-                                <div class="role"><span>Full-Stack Developer</span></div>
+                            <div class="sec-row">
                                 <div class="company-location"><strong>Amazon</strong>, London</div>
-                                <div class="salary">£30000 - £35000</div>                               
                             </div>
+                            <div class="stat-row">
+                                <span class="btns-row">
+                                    <button class="watch-btn btn">Save Job</button>
+                                    <button class="note-btn btn">+ Note</button>
+                                    <button class="archive-btn btn">&times</button>
+                                </span>
+                                <span class="days">25 days ago</span>
+                            </div>  
                         </div>
+
+                        <div class="sresults-row">
+                            <span class="c-logo logo">
+                                <img src="./assets/logo-amazon.svg" alt="logo">
+                            </span>
+                            <div class="pri-row">
+                                <span class="role">Full-Stack Developer</span>
+                                <span class="salary">£30K</span>                               
+                            </div>
+                            <div class="sec-row">
+                                <div class="company-location"><strong>Amazon</strong>, London</div>
+                            </div>
+                            <div class="stat-row">
+                                <span class="btns-row">
+                                    <button class="watch-btn btn">Save Job</button>
+                                    <button class="note-btn btn">+ Note</button>
+                                    <button class="archive-btn btn">&times</button>
+                                </span>
+                                <span class="days">25 days ago</span>
+                            </div>  
+                        </div>
+
+                        <div class="sresults-row">
+                            <span class="c-logo logo">
+                                <img src="./assets/logo-amazon.svg" alt="logo">
+                            </span>
+                            <div class="pri-row">
+                                <span class="role">Full-Stack Developer</span>
+                                <span class="salary">£30K</span>                               
+                            </div>
+                            <div class="sec-row">
+                                <div class="company-location"><strong>Amazon</strong>, London</div>
+                            </div>
+                            <div class="stat-row">
+                                <span class="btns-row">
+                                    <button class="watch-btn btn">Save Job</button>
+                                    <button class="note-btn btn">+ Note</button>
+                                    <button class="archive-btn btn">&times</button>
+                                </span>
+                                <span class="days">25 days ago</span>
+                            </div>  
+                        </div>
+
+
                         
                     </div>
-                </div>
-                <div class="preview-wrapper pwrapper">
+                <!-- </div> -->
+                <!-- <div class="preview-wrapper pwrapper"> -->
                     <div class="preview flex-item">
                         <div class="preview-header">
-                            <span class="i-wrapper"><i class="fas fa-binoculars"></i></span>
-                            <span class="i-wrapper"><i class="fas fa-fire-alt"></i></span>
+                            <div class="splash-row">
+                                <div class="job-logo logo">
+                                    <img src="./assets/logo-amazon.svg" alt="logo">
+                                </div>
+                                <div class="preview-title-row">
+                                    <span class="job-title">Full-Stack Developer</span>
+                                    <span class="icon-span">
+                                        <button class="btn" title="Apply">Apply</button>
+                                        <button class="btn" title="Save Job">Save Job</button>
+                                        <button class="btn" title="Add Note">+ Note</button>
+                                        <button class="btn" title="Not Interested">&times</button>
+
+                                    </span>
+                                </div>
+                                <div class="main-row">
+
+                                    <span class="comp-location">
+                                        <span class="company">Amazon -</span>
+                                        <span class="location">London</span>
+                                    </span>
+                                    <span class="posted">Posted: 2020-05-18</span>
+
+                                </div>
+                            </div>
+                            <div class="stats-row">
+                                
+                            </div>
                         </div>
                         <div class="preview-body">
-                            <div class="posted">Posted: 2020-05-18</div>
-                            <h1 class="preview-title">Job Summary</h1>
+                            <div class="overview-title">Role Overview</div>
                             <p class="preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, aliquid distinctio error qui placeat vero optio mollitia vitae excepturi iste ad ipsum pariatur neque quia illo tempore nulla nesciunt! Quis?
                             Officiis tempore quibusdam nostrum beatae, omnis, illum ab veniam unde, cum aperiam sed repellat ea odit! Deserunt, alias quos illo pariatur fugiat eos voluptate saepe ipsa corrupti, reiciendis error quasi.
-                            Modi dolore odio quibusdam commodi dicta hic qui non sint enim earum tenetur magnam veritatis, culpa, excepturi ipsa. Dicta odit sint aut quasi quaerat recusandae fugit. Officiis cum a eum.
+                            Modi dolore odio quibusdam commodi dicta hic qui <br><br>non sint enim earum tenetur magnam veritatis, culpa, excepturi ipsa. Dicta odit sint aut quasi quaerat recusandae fugit. Officiis cum a eum.
                             Modi rem quis saepe laudantium, blanditiis exercitationem fugit. Aliquam, possimus magni! Voluptas deserunt blanditiis consequatur quaerat voluptatibus dolor? Id numquam vel dolor incidunt quaerat voluptatem, aliquam cum eum praesentium nulla.
-                            Incidunt accusamus mollitia culpa accusantium minima hic cum repudiandae quibusdam repellendus. Necessitatibus iure aliquid cupiditate dignissimos consequuntur rem nemo voluptate voluptatum nulla quidem enim dolorem autem, laboriosam vitae harum veritatis.</p>
+                            <br><br>Incidunt accusamus mollitia culpa accusantium minima hic cum repudiandae quibusdam repellendus. Necessitatibus iure aliquid cupiditate dignissimos consequuntur rem nemo voluptate voluptatum nulla quidem enim dolorem autem, laboriosam vitae harum veritatis.</p>
                         </div> 
                     </div><!-- <div class="preview flex-item"></div> -->
-                </div>
+                <!-- </div> -->
             </div>
         </main>
         <!-- <script src="./app.js"></script>

@@ -4,12 +4,18 @@ import JobSearch from './Models/JobSearch';
 import * as jobSearchView from './Views/jobSearchView';
 import { elements, domStrings } from './Views/base';
 
+//TODO: create add to state & local storage click event for saved jobs btns
+//TODO: create add to state & local storage click event for archive btns
+//TODO: create add to job obj & add state/local storage click event for +note btns
+//TODO: Indeed job search API/company logo API integration
+//TODO: push input search criteria to state with a unique id
+//TODO: add render job state function to reflect job status i.e saved, viewed archived.
 
-//TODO: push search results to state
-    //search state for sresults id & pass into renderPrewview function update preview job info.
+//TODO: finish sresults job formatting
+//TODO: redesign job preview pane
+//TODO: redesign search results pane/row
 
-//TODO: push input search criteria to state with a unique id  
-//TODO: push search viewed to state
+
 
 
 
@@ -28,7 +34,7 @@ const state = {
         id: "",
         job: {}
     },
-    watching: {
+    saved: {
         id: "",
         job: {}
     },
@@ -149,12 +155,3 @@ state.JobSearch.findBtn.addEventListener('click', e => {
 // =============================================================================
 
 
-
-
-
-
-// instanciate jobSearch object for access to methods
-
-// const jobSearchh = new JobSearch('#search-form', '.sresults-wrapper', '.loading-element');
-// jobSearchh.setCountryCode();
-// jobSearchh.configureFormListener();

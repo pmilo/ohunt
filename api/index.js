@@ -43,12 +43,14 @@ const server = createServer((req, res) => {
     const targetURL = `${config.BASE_URL}/${country.toLowerCase()}/${config.BASE_PARAMS}&app_id=${config.APP_ID}&app_key=${config.API_KEY}&what=${search}&where=${location}`;
 
     if (req.method === 'GET') {
+
         console.log(chalk.green(`Proxy GET request to: ${targetURL}`));
         axios.get(targetURL)
             .then(response => {
                 // define header status & content type
                 res.writeHead(200, headers);
                 // convert response data to JSON string & send to DOM
+                /// FOR EACH RESPONSE.DATA / company.company_name
                 res.end(JSON.stringify(response.data))
             })
             .catch(error => {

@@ -5,22 +5,30 @@ import { elements, elementStrings } from './base';
 export const renderJob = (job, currency) => { 
 // const { id, title, company, location, salary_max} = job;
 
+//TODO:// assign full job title string to span titie attr
+
 const markup =  `
 
-    <div class="sresults-row" data-id=${job.id}>
-    <div class="sresults-col-1 sresults-col">
-        <div class="c-logo">
-            <img src="./imgs/logo-amazon.0689ff3ccc259fd0989fad846adfb4ec.svg" alt="logo">
-        </div>
+    <div class="sresults-row data-id=${job.id}">
+    <span class="c-logo logo">
+        <img src="./imgs/logo-amazon.0689ff3ccc259fd0989fad846adfb4ec.svg" alt="logo">
+    </span>
+    <div class="pri-row">
+        <span class="role">${job.title}</span>
+        <span class="salary">${currency}${job.salary_max}</span>                               
     </div>
-    <div class="sresults-col-2 sresults-col">
-        <div class="status"><i class="fas fa-binoculars"></i><i class="fas fa-fire-alt"></i></div>
-        <div class="role"><span>${job.title}</span></div>
-        <div class="company-location"><strong>${job.company.display_name}</strong>, ${job.location.area[1]}</div>
-        <div class="salary">${currency}${job.salary_max}</div>                               
+    <div class="sec-row">
+        <div class="company-location"><strong>${job.company.display_name}</strong> ${job.location.area[1]}</div>
     </div>
-    </div>
-
+    <div class="stat-row">
+        <span class="btns-row">
+            <button class="watch-btn btn" title="Save Job">Save Job</button>
+            <button class="note-btn btn" title="Add Note">+ Note</button>
+            <button class="archive-btn btn" title="Not Interested">&times</button>
+        </span>
+        <span class="days">25 days ago</span>
+    </div>  
+</div>
 `;
 
 return markup;
@@ -29,18 +37,6 @@ return markup;
 
 export const updatePreview = (job, currency, elements) => {
     const { previewHeader, posted, previewTitle, previewTxt } = elements;
-    const markup = `
-    <div class="preview-header">
-        <span class="i-wrapper"><i class="fas fa-binoculars"></i></span>
-        <span class="i-wrapper"><i class="fas fa-fire-alt"></i></span>
-    </div>
-    <div class="posted">${job.created}</div>
-    <div class="preview-body">
-        <h1 class="preview-title">Job Summary</h1>
-        <p class="preview-txt>${job.description}</p>
-    </div> 
-    `
-    // return markup;
 
     // previewHeader.innerHTML
     // previewTitle.innerHTML
@@ -55,14 +51,31 @@ const formatSalary = number => {
     return numStr;
 }
 
-
+const formatTitle = str => {
+    let newStr = str.split('')
+        .splice(0, 30)
+        .join('');
+    newStr += "...";
+    return newStr;
+}
 
 export const formatJob = job => {
-
     // format job title
-
+    if (job.title) { 
+        // remove html markup 
+        job.title = job.title.replace(/<\/?[^>]+(>|$)/g, "")
+        // create new propery to assign shortened job title - retain full title for job spec @ preview.
+        //apply character limit 
+        if (job.title.length > 30) {job.title = formatTitle(job.title); }
+    }
+    
     //format company
-    if (!job.company.display_name) { job.company.display_name = ""; }
+    if (job.company.display_name) { 
+        // add comma
+        job.company.display_name += ",";
+    } else {
+        job.company.display_name = ""; 
+    }
     //format location
     if (!job.location.area[1]) { job.location.area[1] = ""; }
     // format salary no.
@@ -78,6 +91,17 @@ export const clearSearchResults = () => {
 
 export const startLoading = () => {
     state.JobSearch.loadingElement.classList.remove('hide');
+    // const markup = `
+    // <div class="loading-element hide">
+    //     <div class="spinner">
+    //         <i class="fas fa-circle-notch"></i>
+    //     </div>
+    //     <span>Searching...</span>
+    // </div>
+    // `
+    // state.JobSearch.resultsContainer.insertAdjacentHTML('afterbegin', markup);
+
+    
 }
 export const stopLoading = () => {
     state.JobSearch.loadingElement.classList.add('hide');

@@ -261,7 +261,7 @@ label {
 .sresults-row { 
     max-width: 410px;
     min-width: 410px;
-    height: 120px;
+    /* height: 120px; */
     /* background-color: #fff; */
     margin: .9em;
     border-radius: 5px;
@@ -385,7 +385,7 @@ label {
 
 .preview {
     max-width: 720px;
-    min-width: 550px;
+    min-width: 720px;
     min-height: 857px;
     /* max-height: 857px;  */
     background-color: #fff;

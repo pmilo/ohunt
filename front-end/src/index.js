@@ -34,10 +34,8 @@ const state = {
         id: "",
         job: {}
     },
-    saved: {
-        id: "",
-        job: {}
-    },
+    saved: {},
+
     applied: {    
         id: "",
         job: {}
@@ -115,11 +113,13 @@ const controlSearch = () => {
             // add listeners to rendered job rows
             sresults.forEach(jobRow => {
                 jobRow.addEventListener('click', e => {
-
                     const matchedJob = state.JobSearch.getJob(state.results, e.currentTarget.dataset.id);                
                     jobSearchView.updatePreview(matchedJob, '£', elements);
                 })
             });
+            // init sresults listeners
+            controlSresults();
+
         })
         
         // if error, stop loading animation
@@ -133,6 +133,32 @@ state.JobSearch.findBtn.addEventListener('click', e => {
 });
 
 
+
+
+// =============================================================================
+// SEARCH RESULTS CONTROLLER
+// =============================================================================
+
+const controlSresults = () => {
+
+    const saveBtns = [...document.querySelectorAll(domStrings.saveBtns)];
+    console.log('elements.saveBtns');
+    console.log(elements.saveBtns);
+    // SAVE JOB
+    saveBtns.forEach(btn => {
+        jobSearchView.saveJobBtnListen(btn);
+    })
+   
+    
+    //func:
+    // stringify/convert obj to json (?)
+    // add to local storage
+    
+    //on page load - func:
+    // copy localStorage to state
+    //
+        
+}
 
 // =============================================================================
 // JOB CONTROLLER

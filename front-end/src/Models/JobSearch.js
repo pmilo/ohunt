@@ -71,45 +71,34 @@ export default class JobSearch {
 
     getJob(stateObj, id) {
         for (const [key, value] of Object.entries(stateObj)) {
-            if (value.id == id) {
-                return value;
-            } else {
-                console.log('cant find job');  
-            }
+            if (value.id == id) { return value; } 
        }
     }
 
-    // syncLocalStorage = stateObj => {
-    //     // create a copy of state 
-    //     const obj = {...stateObj};
-    //     // see fnyn.io
-    // }
+    addJob(job, id, stateObj) {
+        //TODO: finish addJob func
+        const saved = { ...state.saved };
+        // add job to state.saved copy
+        saved[`job-${id}`] = job;
+        // overwrite original state.saved obj
+        state.saved = saved;
+    }
+
+    deleteJob(job, id, stateObj) {
+        // take copy of state.saved
+        const saved = { ...state.saved };
+        // delete job from state.saved copy
+        delete saved[`job-${id}`];
+        // overwrite original sate.saved obj
+        state.saved = saved;
+    }
+
+    syncLocalStorage(stateObj) {
+        // create a copy of state 
+        const obj = {...stateObj};
+        // see fnyn.io
+    }
     
 
 
-    // configureFormListener() {
-    //     this.searchForm.addEventListener('submit', e => {
-    //         // prevent form submission & page relaod
-    //         event.preventDefault();
-    //         // clear results
-    //         this.resultsContainer.innerHTML = '';
-    //         const { search, location } = extractFormData(this.searchForm);
-    //         // inint loading animation
-    //         jobSearchView.startLoading();
-
-    //         fetch(`http://localhost:5000/?search=${search}&location=${location}&country=${this.countryCode}`)
-    //             //convert response to json
-    //             .then(response => response.json())
-    //             .then(({ results }) => {
-    //                 // end loading animation
-    //                 jobSearchView.stopLoading();
-    //                 return results
-    //                     .map(job => jobTemplate(job, this.getCurrencySymbol))
-    //                     .join('');
-    //             })
-    //             .then(jobs => this.resultsContainer.innerHTML = jobs)
-    //             .catch(() => jobSearchView.stopLoading());
-    //     });
-    // }
-
-}
+} // << End JobSearch class >>

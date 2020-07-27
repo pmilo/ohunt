@@ -38,29 +38,34 @@
                     <nav class="main-nav">
                         <div class="main-nav-wrapper">
 
+                            <div class="main-nav-row results">
+                                <span class="heading"><i class="fas fa-search"></i>Results</span>
+                                <span class="count"></span>
+                            </div>
+
                             <div class="main-nav-row saved-jobs">
                                 <span class="heading"><i class="far fa-star"></i>Saved Jobs</span>
-                                <span class="count">0</span>
+                                <span class="count"></span>
                             </div>
                     
                             <div class="main-nav-row applied">
                                 <span class="heading"><i class="fas fa-check"></i>Applied</span>
-                                <span class="count">0</span>
+                                <span class="count"></span>
                             </div>
                     
                             <div class="main-nav-row archived">
-                                <span class="heading"><i class="far fa-folder"></i>Archived</span>
-                                <span class="count">0</span>
+                                <span class="heading"><i class="far fa-folder"></i>Archived Jobs</span>
+                                <span class="count"></span>
                             </div>
 
                         </div>
                     </nav>
 
                     <div class="loading-element hide">
-                        <div class="spinner">
+                        <span class="spinner">
                             <i class="fas fa-circle-notch"></i>
-                        </div>
-                        <span>Searching...</span>
+                        </span>
+                        <span class="spinner-txt">Searching...</span>
                     </div>
 
                     <div class="search-results">
@@ -142,10 +147,10 @@
                                 <div class="preview-title-row">
                                     <span class="job-title">Full-Stack Developer</span>
                                     <span class="icon-span">
-                                        <button class="btn" title="Apply">Apply</button>
-                                        <button class="btn" title="Save Job">Save Job</button>
-                                        <button class="btn" title="Add Note">+ Note</button>
-                                        <button class="btn" title="Not Interested">&times</button>
+                                        <button class="btn apply-preview-btn" title="Apply" disabled>Apply</button>
+                                        <button class="btn saved-preview-btn" title="Save Job">Save Job</button>
+                                        <button class="btn note-preview-btn" title="Add Note">+ Note</button>
+                                        <button class="btn archive-preview-btn" title="Not Interested">&times</button>
 
                                     </span>
                                 </div>
@@ -170,6 +175,9 @@
                             Modi dolore odio quibusdam commodi dicta hic qui <br><br>non sint enim earum tenetur magnam veritatis, culpa, excepturi ipsa. Dicta odit sint aut quasi quaerat recusandae fugit. Officiis cum a eum.
                             Modi rem quis saepe laudantium, blanditiis exercitationem fugit. Aliquam, possimus magni! Voluptas deserunt blanditiis consequatur quaerat voluptatibus dolor? Id numquam vel dolor incidunt quaerat voluptatem, aliquam cum eum praesentium nulla.
                             <br><br>Incidunt accusamus mollitia culpa accusantium minima hic cum repudiandae quibusdam repellendus. Necessitatibus iure aliquid cupiditate dignissimos consequuntur rem nemo voluptate voluptatum nulla quidem enim dolorem autem, laboriosam vitae harum veritatis.</p>
+                            <div class="view-btn-row">
+                                <button class="btn btn-view">View Job</button>
+                            </div>
                         </div> 
                     </div><!-- <div class="preview flex-item"></div> -->
                 <!-- </div> -->

@@ -1,11 +1,15 @@
 // import JobSearch from '../Models/JobSearch';
-import { elements, elementStrings } from './base';
+import { elements, domStrings } from './base';
+import * as jobSearchView from './jobSearchView';
+import * as navView from './navView';
 
 
-export const renderJob = (job, currency) => { 
+export const renderJob = (job, currency, type) => { 
 // const { id, title, company, location, salary_max} = job;
 
-//TODO:// assign full job title string to span titie attr
+//TODO: assign full job title string to span titie attr - func
+
+const jobMatch = state.JobSearch.getJob(state.saved, job.id);
 
 const markup =  `
 
@@ -22,7 +26,7 @@ const markup =  `
     </div>
     <div class="stat-row">
         <span class="btns-row">
-            <button class="watch-btn btn" title="Save Job">Save Job</button>
+            <button class="watch-btn btn ${jobMatch ? 'selected' : ''}" title="Save Job"> ${jobMatch ? 'Saved' : 'Save Job'}</button>
             <button class="note-btn btn" title="Add Note">+ Note</button>
             <button class="archive-btn btn" title="Not Interested">&times</button>
         </span>
@@ -31,16 +35,27 @@ const markup =  `
 </div>
 `;
 
+
 return markup;
 
 }
 
 export const updatePreview = (job, currency, elements) => {
-    //TODO: add job.dataset.id to preview element (use dataset attr or add to DOM as 'Ref:')
     const { previewHeader, posted, previewTitle, previewLocation, previewCompany, previewTxt } = elements;
     const { company, location, title, created, description } = job;
 
-    // previewHeader.innerHTML
+    const isSaved = state.JobSearch.getJob(state.saved, job.id);
+    
+    if (isSaved) {
+        elements.previewSaveBtn.textContent = "Saved";
+        elements.previewSaveBtn.classList.add("selected");
+    } else {
+        elements.previewSaveBtn.textContent = "Save Job";
+        elements.previewSaveBtn.classList.remove("selected");
+    }
+
+    previewHeader.dataset.id = job.id;
+
     previewTitle.innerHTML = title;
     previewCompany.innerHTML = company.display_name;
     previewLocation.innerHTML = location.area[1];
@@ -94,6 +109,8 @@ export const formatJob = job => {
     return job;
 }
 
+//TODO: create clear/default view preview func - add to innerHTML; invoke when switching job boards
+
 
 export const clearSearchResults = () => {
     state.JobSearch.resultsContainer.innerHTML = "";
@@ -102,14 +119,10 @@ export const clearSearchResults = () => {
 export const startLoading = () => {
     state.JobSearch.loadingElement.classList.remove('hide');
     
-}
+};
 export const stopLoading = () => {
     state.JobSearch.loadingElement.classList.add('hide');
-}
-
-
-//TODO: create update nav count func - call in add/delete job funcs.
-        // find a way to find obj.length to get job count
+};
 
 export const updateNavJobCount = (domCount, stateObj) => {
     const count = Object.keys(stateObj).length;
@@ -118,51 +131,108 @@ export const updateNavJobCount = (domCount, stateObj) => {
     } else {
         domCount.textContent = Object.keys(stateObj).length;
     }
+};
+
+export const addClass = (el, cla) => {
+    // el.classList.add(class);
+    console.log('test')
+};
+
+
+//TODO: add job status properties to job obj data i.e saved: true, note: false, archived: false
+//TODO: create function to check job status and apply btn styling if job is found in state.saved    
+
+// export const renderJobStatus = (job, type) => {
+//     switch(job) {
+//         case job.saved:
+//             // update job element
+//             continue;
+//         case job.arhived:
+//             // update job element
+//             continue;
+//         case job.applied:
+//             // update job element
+//             continue;
+//     }
+// }
+
+// -----------------------------------------------------------------------------
+// SRESULTS LISTENERS
+// -----------------------------------------------------------------------------
+
+export const jobRowListener = (type) => {
+    // convert sresults to array
+    const sresults = [...document.querySelectorAll(domStrings.sresultsRow)];
+
+    // add listeners to rendered job rows
+    sresults.forEach(jobRow => {
+        jobRow.addEventListener('click', e => {
+            const matchedJob = state.JobSearch.getJob(state[type], e.currentTarget.dataset.id);                
+            jobSearchView.updatePreview(matchedJob, '£', elements);
+        });
+    });
 }
+    
 
+export const saveJobBtnListener = btn => {
+    //TODO: resolve inconsistencies with preview save job function.
 
-//TODO: create function to check job status and apply btn styling if job is found in state.saved
+    const saveBtns = [...document.querySelectorAll(domStrings.saveBtns)];
+    // add preview save btn to saveBtns array
+    saveBtns.push(elements.previewSaveBtn);
+    console.log('saveBtns');
+    console.log(saveBtns);
 
-// -----------------------------------------------------------------------------
-// DOM LISTENERS
-// -----------------------------------------------------------------------------
+    saveBtns.forEach(btn => {
+        //attach listener
+        btn.addEventListener('click', e => {
+            e.stopPropagation();
 
-export const saveJobBtnListen = btn => {
-    //attach listener
-    btn.addEventListener('click', e => {
-        // get job id from dom dataset attr
-        const id = e.currentTarget.offsetParent.dataset.id;
-        //get job from sresults with id
-        const jobMatch = state.JobSearch.getJob(state.results, id)
-        // check if job id is in state.saved
-        if (!state.JobSearch.getJob(state.saved, id)) {
-            // add job to state
-            state.JobSearch.addJob(jobMatch, id, state.saved);
-            //update nav job count
-            updateNavJobCount(elements.savedJobsNav, state.saved);
-        } else {
-            // remove job from state
-            state.JobSearch.deleteJob(jobMatch, id, state.saved);
-            //update nav job count
-            updateNavJobCount(elements.savedJobsNav, state.saved);
-        }
+            let el = document.querySelector(domStrings.previewHeader);
+            let id;
+
+            // get job id from dom dataset attr
+            if (btn.classList.contains('saved-preview')) {
+                id = el.dataset.id;
+                console.log('preview id');
+                console.log(id);
+            } else {
+                // get id from job row dataset
+                id = e.currentTarget.offsetParent.dataset.id;
+                console.log('job row id');
+                console.log(id);
+            }
+
+            //get job from sresults with id
+            const jobMatch = state.JobSearch.getJob(state.results, id)
+            console.log('jobMatch');
+            console.log(jobMatch);
+
+            // check if job id is in state.saved
+            if (!state.JobSearch.getJob(state.saved, id)) {
+                // add job to state
+                state.JobSearch.addJob(jobMatch, id, "saved");
+                //update nav job count
+                updateNavJobCount(elements.savedJobsNav, state.saved);
+                // toggle selectd styling
+                e.currentTarget.textContent = "Saved";
+                e.currentTarget.classList.toggle("selected");
+            } else {
+                // remove job from state
+                state.JobSearch.deleteJob(jobMatch, id, "saved");
+
+                //TODO: remove job from dom to resolve bug when previewing job after unsaving.
+
+                //update nav job count
+                updateNavJobCount(elements.savedJobsNav, state.saved);
+                // toggle selected styling
+                e.currentTarget.textContent = "Save Job";
+                e.currentTarget.classList.toggle("selected");
+            }
+        }, true);
     })
 
-    // SAVE JOB
-    
-    //func: 
-    // get sresults-row data-id value
-    //func:
-    // use data id to look for job in state.results; `job$-{id}`
-    // push matching state.results obj to state.savedJobs
-    // update nav count
-    
-    //func:
-    // stringify/convert obj to json (?)
-    // add to local storage
-    
-    
-    //on page load - func:
-    // copy localStorage to state
-    //
+
+    //TODO: set up archived listener
+
 };

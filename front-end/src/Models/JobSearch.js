@@ -53,52 +53,73 @@ export default class JobSearch {
         this.currencySymbol = this.getCurrencySymbol(this.countryCode);
     }
 
-
-    // updateState(jobsArr, targetObjStr){
-    //     jobsArr.forEach(job => {             
-    //         // state.results["id"] = job.id;
-    //         state.targetObjStr[`job-${job.id}`] = job;
-    //     });
-    // }
-
-    // getJob(stateObj, id) {
-    //     stateObj.forEach(job => {
-    //         if (job.id == id) {
-    //             return job;
-    //         } else {console.log('cant find object!')}
-    //     })
-    // }
-
     getJob(stateObj, id) {
         for (const [key, value] of Object.entries(stateObj)) {
-            if (value.id == id) { return value; } 
+            if (value.id == id) { 
+                return value; 
+            } else if (value == undefined) {
+                return false;
+            } 
        }
     }
 
-    addJob(job, id, stateObj) {
-        //TODO: finish addJob func
-        const saved = { ...state.saved };
-        // add job to state.saved copy
-        saved[`job-${id}`] = job;
-        // overwrite original state.saved obj
-        state.saved = saved;
+    addProp(job, type){
+        // add prop to job
+        job[type] = true;
+
+        // return job
+        return job;
     }
 
-    deleteJob(job, id, stateObj) {
+    removeProp(job, type){
+        // set job type prop to false
+        job[type] = false;
+
+        //return job
+        return job;
+    }
+
+    addJob(job, id, objStr) {
+        // take copy of state
+        const copy = { ...state[objStr] };
+        // add job to state copy
+        copy[`job-${id}`] = job;
+        // overwrite original state copy obj
+        state[objStr] = copy;
+        //update local storage 
+        this.updateLocalStorage(objStr);
+    }
+
+    deleteJob(job, id, objStr) {
         // take copy of state.saved
-        const saved = { ...state.saved };
+        const copy = { ...state[objStr] };
         // delete job from state.saved copy
-        delete saved[`job-${id}`];
+        delete copy[`job-${id}`];
         // overwrite original sate.saved obj
-        state.saved = saved;
+        state[objStr] = copy;
+        //update local storage 
+        this.updateLocalStorage(objStr);
     }
 
-    syncLocalStorage(stateObj) {
-        // create a copy of state 
-        const obj = {...stateObj};
-        // see fnyn.io
+
+    updateLocalStorage(objStr) {
+        localStorage.setItem(objStr, JSON.stringify(state[objStr]));
     }
+
+    readLocalStorage(stateObj) {
+        // convert state object keys to array
+        const objArr = Object.keys(stateObj);
+        // convert back to array using objArr keys to target local storage objects for copying to state
+        objArr.map(obj => {       
+            const storageObj = JSON.parse(localStorage.getItem(obj));
+
+                if (storageObj) {
+                    state[obj] = storageObj;
+                }
+            // if (storage) state[obj] = storage;
+        });
+    }
+
     
-
 
 } // << End JobSearch class >>

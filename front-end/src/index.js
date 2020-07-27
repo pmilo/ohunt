@@ -2,9 +2,11 @@ import "./styles.css";
 
 import JobSearch from './Models/JobSearch';
 import * as jobSearchView from './Views/jobSearchView';
+import * as navView from './Views/navView';
 import { elements, domStrings } from './Views/base';
 
-//TODO: create add to state & local storage click event for saved jobs btns
+//TODO: wrap all listner functions into one func to invoke when rendering job rows
+
 //TODO: create add to state & local storage click event for archive btns
 //TODO: create add to job obj & add state/local storage click event for +note btns
 //TODO: Indeed job search API/company logo API integration
@@ -13,7 +15,6 @@ import { elements, domStrings } from './Views/base';
 
 //TODO: finish sresults job formatting
 //TODO: redesign job preview pane
-//TODO: redesign search results pane/row
 
 
 
@@ -24,29 +25,27 @@ import { elements, domStrings } from './Views/base';
 // =============================================================================
 
 const state = {
-    search: {
-        keyword: "",
-        location: ""
-    },
+
     results: {},
-
-    viewed: {   
-        id: "",
-        job: {}
-    },
     saved: {},
-
+    archived: {},
+    viewed: {},
     applied: {    
-        id: "",
-        job: {}
-    },
-    archived: {
         id: "",
         job: {}
     }
 };
 
 window.state = state;
+
+window.addEventListener('load', () => {
+    // Restore likes
+    state.JobSearch.readLocalStorage(state);
+
+    // update nav count
+    //TODO: make func dynamic to update all nav/state types
+    jobSearchView.updateNavJobCount(elements.savedJobsNav, state.saved);  
+});
 
 
 
@@ -107,18 +106,11 @@ const controlSearch = () => {
             state.JobSearch.resultsContainer.innerHTML = jobs;
             state.JobSearch.resultsContainer.style.overflow = "scroll";
             
-            // convert sresults to array
-            const sresults = [...document.querySelectorAll(domStrings.sresultsRow)];
-            
-            // add listeners to rendered job rows
-            sresults.forEach(jobRow => {
-                jobRow.addEventListener('click', e => {
-                    const matchedJob = state.JobSearch.getJob(state.results, e.currentTarget.dataset.id);                
-                    jobSearchView.updatePreview(matchedJob, '£', elements);
-                })
-            });
-            // init sresults listeners
+            // add search results listeners
             controlSresults();
+
+            // update results nav count
+            jobSearchView.updateNavJobCount(elements.resultsNav, state.results);
 
         })
         
@@ -140,24 +132,9 @@ state.JobSearch.findBtn.addEventListener('click', e => {
 // =============================================================================
 
 const controlSresults = () => {
-
-    const saveBtns = [...document.querySelectorAll(domStrings.saveBtns)];
-    console.log('elements.saveBtns');
-    console.log(elements.saveBtns);
-    // SAVE JOB
-    saveBtns.forEach(btn => {
-        jobSearchView.saveJobBtnListen(btn);
-    })
-   
-    
-    //func:
-    // stringify/convert obj to json (?)
-    // add to local storage
-    
-    //on page load - func:
-    // copy localStorage to state
-    //
-        
+    //JOB ROW listener
+    jobSearchView.jobRowListener("results");
+    jobSearchView.saveJobBtnListener();
 }
 
 // =============================================================================
@@ -171,10 +148,14 @@ const controlSresults = () => {
 
 
 // =============================================================================
-// WATCH CONTROLLER
+// NAV CONTROLLER
 // =============================================================================
-
-
+const controlNav = () => {
+    elements.navRows.forEach(row => {
+        navView.navRowListener(row);
+    })
+}
+controlNav();
 
 // =============================================================================
 // APPLIED CONTROLLER

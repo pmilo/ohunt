@@ -1,5 +1,6 @@
 :root {
-    --signature: #193FFF;
+    /* --signature: rgb(25, 63, 255); */
+    --signature: rgba(90, 118, 255, 0.692);
     --highlight: rgb(230, 233, 255);
     --pri-txt: #5a5a5a;
     --sec-txt: #8f8e8e;
@@ -150,18 +151,26 @@ label {
 /* ========================================================================== */
 
 .main-nav {
-    background-color: #fff;
+    /* background-color: #fff; */
     width: 100%;
 }
 
 .main-nav-row {
-    background-color: lightgoldenrodyellow;
+    font-size: .9rem;
+    width: 90%;
     margin-bottom: .3em;
-    padding: .3em 0;
+    padding: .4em .7em;
 
     display: flex;
     justify-content: space-between;
+    border: solid 3px var(--signature);
+    border-radius: 5px;
+}
 
+.main-nav-row:hover {
+    background-color: var(--signature);
+    border-color: var(--signature);
+    color: #fff;
 }
 
 .heading i {
@@ -170,15 +179,9 @@ label {
 
 }
 
-.main-nav-row .count {
-    margin-right: 12em;
+.applied {
+    display: none;
 }
-
-
-
-
-
-
 
 
 
@@ -217,7 +220,6 @@ label {
     margin: .7em;
     font-size: .9rem;
     color: rgb(144, 144, 144);
-
     position: absolute;
     top: 370px;
     left: 502px;
@@ -226,16 +228,23 @@ label {
     /* align-items: center; */
 }
 
+.spinner-txt {
+    margin-left: .5em;
+}
+
 .loading-element .spinner i {
     /* width: 27px; */
     margin-right: .5em;
     font-size: 1.2rem;
     color: var(--signature);
 
+    margin: 0;
+    padding: 0;
+
 
 
     /* transition: all .6s ease-in-out; */
-    animation: rotate .7s infinite linear;
+    animation: rotate .7s infinite linear ;
     transform: rotate(360deg);
 }
 
@@ -311,6 +320,12 @@ label {
     border: 1px solid #ccc;
 }
 
+.btn:hover {
+    background-color: var(--signature);
+    color: #fff;
+    border-color: var(--signature);
+}
+
 .sresults-row .btn {
     margin-right: .32em;
 }
@@ -376,6 +391,12 @@ label {
     background-image: linear-gradient(315deg, #05e8ba 0%, #087ee1 74%);   
 }
 
+.selected {
+    background-color: var(--signature);
+    border-color: var(--signature);
+    color: #fff;
+}
+
 
 
 
@@ -393,6 +414,7 @@ label {
 
     display: flex;
     flex-direction: column;
+    /* box-shadow: 5px 10px 30px #909090; */
 }
 
 .preview-header ul {
@@ -411,11 +433,24 @@ label {
   width: 100%;
 }
 
-.preview-title-row {
+.preview-title-row { 
     display: flex;
     justify-content: space-between;
     margin-top: 4em;
     margin-bottom: .8em;
+}
+
+.view-btn-row {
+    display: flex;
+    margin: 4em 0 1em 0;
+    height: 31.53px;
+}
+
+.btn-view {
+    font-size: 1rem;
+    padding: .25em .6em;
+    width: 15em;
+    margin: 0 auto;
 }
 
 .preview-title-row .btn {

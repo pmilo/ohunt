@@ -54,30 +54,32 @@ export default class JobSearch {
     }
 
     getJob(stateObj, id) {
+        // console.log('id passed into getJob');
+        // console.log(id);
         for (const [key, value] of Object.entries(stateObj)) {
-            if (value.id == id) { 
-                return value; 
-            } else if (value == undefined) {
-                return false;
+
+            if (value.id === id) { 
+                return value;
             } 
+            
        }
     }
 
-    addProp(job, type){
-        // add prop to job
-        job[type] = true;
+    // addProp(job, type){
+    //     // add prop to job
+    //     job[type] = true;
 
-        // return job
-        return job;
-    }
+    //     // return job
+    //     return job;
+    // }
 
-    removeProp(job, type){
-        // set job type prop to false
-        job[type] = false;
+    // removeProp(job, type){
+    //     // set job type prop to false
+    //     job[type] = false;
 
-        //return job
-        return job;
-    }
+    //     //return job
+    //     return job;
+    // }
 
     addJob(job, id, objStr) {
         // take copy of state

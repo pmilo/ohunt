@@ -1,4 +1,5 @@
 export const elements = {
+    sresults: document.querySelector('.search-results'),
     navRows: document.querySelectorAll('.main-nav-row'),
     resultsNav: document.querySelector('.results .count'),
     savedJobsNav: document.querySelector('.saved-jobs .count'),
@@ -9,18 +10,21 @@ export const elements = {
     preview: document.querySelector(".preview"),
     previewHeader: document.querySelector(".preview-header"),
     previewHeaderBtns: document.querySelectorAll(".preview-header .i-wrapper"),
-    previewSaveBtn: document.querySelector(".saved-preview"),
+    previewSaveBtn: document.querySelector(".saved-preview-btn"),
+    previewArchiveBtn: document.querySelector(".archive-preview-btn"),
     previewBody: document.querySelector(".preview-body"),
     previewTitle: document.querySelector(".job-title"),
     previewTxt: document.querySelector(".preview-txt"),
     posted: document.querySelector(".posted"),
     previewLocation: document.querySelector("span.location"),
-    previewCompany: document.querySelector("span.company")
+    previewCompany: document.querySelector("span.company"),
+    viewBtnHref: document.querySelector('.view-btn-row a')
 };
 
 
 export const domStrings = {
     sresultsRow: ".sresults-row",
     saveBtns: ".watch-btn",
+    archiveBtns: ".archive-btn",
     previewHeader: ".preview-header"
 }

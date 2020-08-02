@@ -408,13 +408,13 @@ label {
     max-width: 720px;
     min-width: 720px;
     min-height: 857px;
-    /* max-height: 857px;  */
+    max-height: 857px; 
     background-color: #fff;
     padding: 3em;
-
+    
     display: flex;
     flex-direction: column;
-    /* box-shadow: 5px 10px 30px #909090; */
+    
 }
 
 .preview-header ul {
@@ -422,6 +422,10 @@ label {
     padding: 0;
 }
 
+.preview-body {
+    height: 100%; 
+    position: relative;
+}
 
 .job-logo {
     width: 60px;
@@ -441,14 +445,21 @@ label {
 }
 
 .view-btn-row {
-    display: flex;
-    margin: 4em 0 1em 0;
-    height: 31.53px;
+    /* margin: 3em 0 3em 0; */
+    /* height: 31.53px; */
+    height: 100%;
+   
+    /* display: flex; */
+    /* justify-content: center;  */
+   
+    position: absolute;
+    top: 460px;
+    left: 208px;
+
 }
 
 .btn-view {
-    font-size: 1rem;
-    padding: .25em .6em;
+    padding: .5em .6em;
     width: 15em;
     margin: 0 auto;
 }
@@ -456,6 +467,7 @@ label {
 .preview-title-row .btn {
     margin-left: .7em;
 } 
+
 
 .job-title {
     font-size: 1.5rem;

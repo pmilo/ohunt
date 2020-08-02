@@ -45,6 +45,7 @@ window.addEventListener('load', () => {
     // update nav count
     //TODO: make func dynamic to update all nav/state types
     jobSearchView.updateNavJobCount(elements.savedJobsNav, state.saved);  
+    jobSearchView.updateNavJobCount(elements.archivedNav, state.archived);
 });
 
 
@@ -62,7 +63,10 @@ state.JobSearch.setCountryCode();
 
 const controlSearch = () => {
 
-    // clear DOM search inputs 
+    //TODO: clear preview pane
+
+    // clear state.results
+    state.results = {};
     
     // clear search results
     jobSearchView.clearSearchResults();
@@ -111,7 +115,6 @@ const controlSearch = () => {
 
             // update results nav count
             jobSearchView.updateNavJobCount(elements.resultsNav, state.results);
-
         })
         
         // if error, stop loading animation
@@ -135,6 +138,7 @@ const controlSresults = () => {
     //JOB ROW listener
     jobSearchView.jobRowListener("results");
     jobSearchView.saveJobBtnListener();
+    jobSearchView.archiveBtnListener();
 }
 
 // =============================================================================

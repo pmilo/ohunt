@@ -10,13 +10,22 @@ import { elements, domStrings } from './base';
 
 export const navRowListener = row => {
     row.addEventListener('click', e => {
+        
         // type must match state obj's name
         let type = e.currentTarget.firstElementChild.textContent
             .split(' ')[0]
             .toLowerCase();
-    
+
+        console.log('type');
+        console.log(type);
+        
+        // add selected board type to DOM
+        elements.sresults.board = type;
+        
         // clear search results
         jobSearchView.clearSearchResults();
+
+        //TODO: clear preview pane
 
         // TODO: add laoding saved jobs animation
 
@@ -40,15 +49,15 @@ export const navRowListener = row => {
             markup = `No ${type} jobs!`;
         }
 
-        
+
         //TODO: add no jobs HTML markup & w/ styling
 
         // add saved jobs markup to DOM
         state.JobSearch.resultsContainer.innerHTML = markup.replace(undefined, '');
-        console.log('type @navRowListener - navView.js');
-        console.log(type);
+      
         jobSearchView.jobRowListener(type);
         jobSearchView.saveJobBtnListener();
+        jobSearchView.archiveBtnListener();
 
     })
 }

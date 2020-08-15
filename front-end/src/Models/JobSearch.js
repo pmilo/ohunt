@@ -15,6 +15,41 @@ export default class JobSearch {
 
     }
 
+    async getResults(url){
+        const response = await fetch(url);
+        const json = await response.json();
+        return json.results;
+    }
+
+    async getCompanyData(job) {
+
+        const res = await fetch(`https://autocomplete.clearbit.com/v1/companies/suggest?query=:${job.company.display_name}`)
+        const json = await res.json();
+      
+        try {   
+                if (json.length >= 1) {
+                    job.name = json[0].name;
+                    job.domain = json[0].domain;
+                    job.logo = json[0].logo;        
+                }
+                return job;
+        } catch(error) {
+            alert(error);
+        }
+        
+    };
+
+
+    async addCompanyData(resultsArr) {
+        for (const job of resultsArr) {
+            // get company data, add to job obj & return
+           const newJob = await state.JobSearch.getCompanyData(job); 
+           // overwrite existing job in state.results with updated job obj
+           state.results[`job-${job.id}`] = newJob;  
+        }
+    }
+
+
     setCountryCode() {
         // set default country code
         this.countryCode = 'gb';

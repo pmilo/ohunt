@@ -16,14 +16,41 @@ export const renderJob = (job, currency, type) => {
     const jobMatch = state.JobSearch.getJob(state.saved, job.id);
     let archivedJob = state.JobSearch.getJob(state.archived, job.id);
 
-    console.log('archivedJob');
-    console.log(archivedJob);
+    // console.log('archivedJob');
+    // console.log(archivedJob);
     
+    // try looping over job obj - if job.logo exists, push value to logo variable.
+
+    // job = JSON.parse(job);
+    
+    console.log('job:');
+    console.log(job)
+
+    // let logoURL;
+
+    // for (let [key, value] of Object.entries(job)) { 
+    //     // console.log('key');
+    //     // console.log(key);
+    //     if (key === "logo") { 
+    //         logoURL = JSON.parse(value);
+    //     } 
+    //}
+        
+    console.log('job.logo');
+    console.log(job.logo);
+
+    // console.log('logoURL:');
+    // console.log(logoURL);
+
+    // console.log('job.id typeof');
+    // console.log(typeof job.id);
+
+
     let markup =  `
     
     <div class="sresults-row" data-id=${job.id}>
     <span class="c-logo logo">
-    <img src="./imgs/logo-amazon.0689ff3ccc259fd0989fad846adfb4ec.svg" alt="logo">
+    <img src="${job.logo ? job.logo : "" }" alt="logo">
     </span>
     <div class="pri-row">
     <span class="role">${job.title}</span>
@@ -42,7 +69,8 @@ export const renderJob = (job, currency, type) => {
     </div>  
     </div>
     `;
-        
+      
+    // don't render to results board if job is archived
     if (archivedJob && type === "results") { 
         markup = "";
     }

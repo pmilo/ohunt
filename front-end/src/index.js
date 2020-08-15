@@ -7,9 +7,13 @@ import { elements, domStrings } from './Views/base';
 
 //TODO: wrap all listner functions into one func to invoke when rendering job rows
 
-//TODO: create add to state & local storage click event for archive btns
 //TODO: create add to job obj & add state/local storage click event for +note btns
+
 //TODO: Indeed job search API/company logo API integration
+    // correct company logo styling
+    // add company logo render to preview pane
+    // add default occuhunt logo for unsucessfull company/logo clearbit match
+    
 //TODO: push input search criteria to state with a unique id
 //TODO: add render job state function to reflect job status i.e saved, viewed archived.
 
@@ -61,7 +65,7 @@ state.JobSearch.setCountryCode();
 
 // add search listener
 
-const controlSearch = () => {
+const controlSearch = async ()  => {
 
     //TODO: clear preview pane
 
@@ -78,47 +82,53 @@ const controlSearch = () => {
     const { search, location } = state.JobSearch.extractFormData(state.JobSearch.searchForm);
     // build url 
     const targetURL = `http://localhost:5000/?search=${search}&location=${location}&country=${state.JobSearch.countryCode}`;
-    console.log('targetURL:');
-    console.log(targetURL);
+  
+    // fetch API for search results
+    let results;
+    try {
+        results = await state.JobSearch.getResults(targetURL);
+    } catch {
+        alert('Search Error!');
+        jobSearchView.stopLoading();
+    }
+
+    // remove loading animation
+    jobSearchView.stopLoading();
+
+    // add clearbit company data to results & copy to state.results.
+    await state.JobSearch.addCompanyData(results);          
     
-    // query API with url 
-    fetch(targetURL)
-        .then(response => response.json())
-        .then(({ results }) => {
+    //convert state.results to iterable array
+    let resultsArr = [];
 
-            console.log('results:');
-            console.log(results);
+    for (let [key, value] of Object.entries(state.results)) { 
+        if (key) { 
+            // console.log('value');
+            // console.log(value);
+            resultsArr.push(value);
+        } 
+    }
+    console.log('resultsArr');
+    console.log(resultsArr);
+    
+    // build & render job(s) markup
+    const resultsStr = resultsArr.map(job =>                 
+        jobSearchView.renderJob(jobSearchView.formatJob(job), state.JobSearch.currencySymbol)
+    )
+    // join array elements/convert to string
+    .join('');    
 
-            // remove loading animation
-            jobSearchView.stopLoading();
+    // add results markup to DOM
+    state.JobSearch.resultsContainer.innerHTML = resultsStr;
+    state.JobSearch.resultsContainer.style.overflow = "scroll";
+    
+    // add search results listeners
+    controlSresults();
 
-            // add search results to state
-            results.forEach(job => {             
-                // state.results["id"] = job.id;
-                state.results[`job-${job.id}`] = job;  
-            })
+    // update results nav count
+    jobSearchView.updateNavJobCount(elements.resultsNav, state.results);
 
-            return results
-                // for each results object, run renderJob(); 
-                .map(job => 
-                    jobSearchView.renderJob(jobSearchView.formatJob(job), state.JobSearch.currencySymbol)
-                )
-                .join('');
-        })
-        // update DOM with results
-        .then(jobs => {
-            state.JobSearch.resultsContainer.innerHTML = jobs;
-            state.JobSearch.resultsContainer.style.overflow = "scroll";
-            
-            // add search results listeners
-            controlSresults();
-
-            // update results nav count
-            jobSearchView.updateNavJobCount(elements.resultsNav, state.results);
-        })
-        
-        // if error, stop loading animation
-        .catch(() => jobSearchView.stopLoading());
+    // if error, stop loading animation    
 }
 
 // add event listener

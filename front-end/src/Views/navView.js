@@ -16,8 +16,8 @@ export const navRowListener = row => {
             .split(' ')[0]
             .toLowerCase();
 
-        console.log('type');
-        console.log(type);
+        // console.log('type');
+        // console.log(type);
         
         // add selected board type to DOM
         elements.sresults.board = type;

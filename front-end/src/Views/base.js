@@ -16,6 +16,7 @@ export const elements = {
     previewTitle: document.querySelector(".job-title"),
     previewTxt: document.querySelector(".preview-txt"),
     posted: document.querySelector(".posted"),
+    previewLogo: document.querySelector(".job-logo img"),
     previewLocation: document.querySelector("span.location"),
     previewCompany: document.querySelector("span.company"),
     viewBtnHref: document.querySelector('.view-btn-row a')

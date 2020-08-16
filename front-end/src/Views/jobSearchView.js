@@ -14,43 +14,13 @@ export const renderJob = (job, currency, type) => {
     //TODO: assign full job title string to span titie attr - func
     
     const jobMatch = state.JobSearch.getJob(state.saved, job.id);
-    let archivedJob = state.JobSearch.getJob(state.archived, job.id);
-
-    // console.log('archivedJob');
-    // console.log(archivedJob);
+    const archivedJob = state.JobSearch.getJob(state.archived, job.id);
     
-    // try looping over job obj - if job.logo exists, push value to logo variable.
-
-    // job = JSON.parse(job);
-    
-    console.log('job:');
-    console.log(job)
-
-    // let logoURL;
-
-    // for (let [key, value] of Object.entries(job)) { 
-    //     // console.log('key');
-    //     // console.log(key);
-    //     if (key === "logo") { 
-    //         logoURL = JSON.parse(value);
-    //     } 
-    //}
-        
-    console.log('job.logo');
-    console.log(job.logo);
-
-    // console.log('logoURL:');
-    // console.log(logoURL);
-
-    // console.log('job.id typeof');
-    // console.log(typeof job.id);
-
-
     let markup =  `
     
     <div class="sresults-row" data-id=${job.id}>
     <span class="c-logo logo">
-    <img src="${job.logo ? job.logo : "" }" alt="logo">
+    <img src="${job.logo ? job.logo : 'imgs/ohunt-logo2.8b89ae493ac6525c8a06fd4fe23106c1.png' }" alt="logo">
     </span>
     <div class="pri-row">
     <span class="role">${job.title}</span>
@@ -90,8 +60,8 @@ export const renderJob = (job, currency, type) => {
     }
 
     export const updatePreview = (job, currency, elements) => {
-        const { previewHeader, posted, previewTitle, previewLocation, previewCompany, previewTxt, viewBtnHref } = elements;
-        const { company, location, title, created, description, redirect_url } = job;
+        const { previewHeader, posted, previewTitle, previewLocation, previewCompany, previewLogo, previewTxt, viewBtnHref } = elements;
+        const { company, location, logo, title, created, description, redirect_url } = job;
         
         const isSaved = state.JobSearch.getJob(state.saved, job.id);
         const isArchived = state.JobSearch.getJob(state.archived, job.id);
@@ -114,6 +84,7 @@ export const renderJob = (job, currency, type) => {
     
     previewTitle.innerHTML = title;
     previewCompany.innerHTML = company.display_name;
+    previewLogo.src = `${logo ? logo : "imgs/ohunt-logo2.8b89ae493ac6525c8a06fd4fe23106c1.png"}`;
     previewLocation.innerHTML = location.area[1];
     posted.innerHTML = created;
     previewTxt.innerHTML = description;
@@ -250,10 +221,6 @@ export const saveJobBtnListener = type => {
             const jobMatch = state.JobSearch.getJob(state.results, id);
             //look for selected job in state.saved & return
             const savedJob = state.JobSearch.getJob(state.saved, id);
-            console.log('jobMatch');
-            console.log(jobMatch);
-            console.log('savedJob');
-            console.log(savedJob);
 
             if (!savedJob) {
                 // add job to state

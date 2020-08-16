@@ -1,8 +1,16 @@
 :root {
     /* --signature: rgb(25, 63, 255); */
-    --signature: rgba(90, 118, 255, 0.692);
-    --highlight: rgb(230, 233, 255);
-    --pri-txt: #5a5a5a;
+    /* --signature: rgba(90, 118, 255, 0.692); */
+    --signature: #f6584a;
+    /* --highlight: rgb(230, 233, 255); */
+    --sec: #010564;
+    --tri: #00022E;
+    --qua: #010564;
+    
+
+    --pri-txt: #00044d;
+    /* --sec-txt: #3f43b4; */
+    /* --pri-txt: #5a5a5a; */
     --sec-txt: #8f8e8e;
 
     /* --main-padding: 15px;  */
@@ -163,7 +171,7 @@ label {
 
     display: flex;
     justify-content: space-between;
-    border: solid 3px var(--signature);
+    border: solid 3px #cfd4db;
     border-radius: 5px;
 }
 
@@ -172,6 +180,8 @@ label {
     border-color: var(--signature);
     color: #fff;
 }
+
+
 
 .heading i {
     margin-right: 1em;
@@ -294,7 +304,8 @@ label {
 }
 
 .salary {
-    color: #05E2BC;
+    color: var(--qua);
+    /* color: #05E2BC; */
 }
 
 .sec-row {
@@ -336,10 +347,10 @@ label {
 }
 
 .logo {
-    background-color: #ffbb00;
-    padding: .6rem;
+    /* background-color: #ffbb00; */
+    /* padding: .6rem; */
     border-radius: .3rem;
-    box-shadow: 0px 1px 2px #ccc;
+    /* box-shadow: 0px 1px 2px #ccc; */
 }
 
 .c-logo {
@@ -348,7 +359,13 @@ label {
 }
 
 .c-logo img {
-    max-width: 22px;
+    min-width: 35px;
+    max-width: 35px;
+    min-height: 35px;
+    box-shadow: 0px 1px 2px #ccc;
+    border-radius: .2rem;
+
+
 }
 
 
@@ -362,19 +379,18 @@ label {
     
 }
 
-.status i {
+/* .status i {
     color: var(--highlight);
     display: flex;
     align-items: flex-end;
     margin: 0 0 0 .7em;
-    /* float: right; */
     font-size: .9rem;
 
 }
 
 .status i:hover {
     color: var(--signature);
-}
+} */
 
 .company-location {
     /* font-weight: bold; */
@@ -428,12 +444,17 @@ label {
 }
 
 .job-logo {
-    width: 60px;
-    height: 60px;
+    min-width: 75px;
+    max-width: 75px;
+    min-height: 75px;
+    max-height: 75px;
     margin: 0 auto;
 }
 
 .job-logo img {
+    border-radius: .2rem;
+    box-shadow: 0px 1px 2px #ccc;
+
   width: 100%;
 }
 

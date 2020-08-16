@@ -5,21 +5,24 @@ import * as jobSearchView from './Views/jobSearchView';
 import * as navView from './Views/navView';
 import { elements, domStrings } from './Views/base';
 
+
+//TODO: Indeed job search API integration / Adzuna plan upgrade
+
+//TODO: add default occuhunt logo for unsucessfull company/logo clearbit match
+
+//TODO: redesign job preview pane
+
+//TODO: add tool tip for job boards w/ option to ok/x/remove - remember interaction; copy to state/local storage: { state.board - tool_tip: true/false }
+
 //TODO: wrap all listner functions into one func to invoke when rendering job rows
 
 //TODO: create add to job obj & add state/local storage click event for +note btns
 
-//TODO: Indeed job search API/company logo API integration
-    // correct company logo styling
-    // add company logo render to preview pane
-    // add default occuhunt logo for unsucessfull company/logo clearbit match
-    
-//TODO: push input search criteria to state with a unique id
-//TODO: add render job state function to reflect job status i.e saved, viewed archived.
-
 //TODO: finish sresults job formatting
-//TODO: redesign job preview pane
 
+//TODO: remove archived jobs from state.results before rendering @findbtn listener
+
+//TODO: push input search criteria to state with a unique id
 
 
 

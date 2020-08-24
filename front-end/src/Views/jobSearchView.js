@@ -26,16 +26,17 @@ export const renderJob = (job, currency, type) => {
     <span class="role">${job.title}</span>
     <span class="salary">${currency}${job.salary_max}</span>                               
     </div>
-    <div class="sec-row">
-    <div class="company-location"><strong>${job.company.display_name}</strong> ${job.location.area[1]}</div>
-    </div>
+    
+    <div class="company-location">${job.company.display_name ? '<strong>' + job.company.display_name + '</strong>' : 'Company not specified'}</div>
+    <div class="location-row">${job.location.area[1] ? job.location.area[1] : 'Location not specified'}</div>
+    
     <div class="stat-row">
     <span class="btns-row">
     <button class="watch-btn btn ${jobMatch ? 'selected' : ''}" title="Save Job"> ${jobMatch ? 'Saved' : 'Save Job'}</button>
     <button class="note-btn btn" title="Add Note">+ Note</button>
     <button class="archive-btn btn ${archivedJob ? 'selected' : ''}" title="Not Interested">&times</button>
     </span>
-    <span class="days">25 days ago</span>
+    <span class="days">1 day ago</span>
     </div>  
     </div>
     `;
@@ -83,9 +84,9 @@ export const renderJob = (job, currency, type) => {
     previewHeader.dataset.id = job.id;
     
     previewTitle.innerHTML = title;
-    previewCompany.innerHTML = company.display_name;
+    previewCompany.innerHTML = `${company.display_name ? company.display_name : 'Company not specified' }`;
     previewLogo.src = `${logo ? logo : "imgs/ohunt-logo2.8b89ae493ac6525c8a06fd4fe23106c1.png"}`;
-    previewLocation.innerHTML = location.area[1];
+    previewLocation.innerHTML = ` – ${location.area[1]}`
     posted.innerHTML = created;
     previewTxt.innerHTML = description;
     viewBtnHref.href = redirect_url;
@@ -126,12 +127,13 @@ export const formatJob = job => {
     }
     
     //format company
-    if (job.company.display_name) { 
-        // add comma
-        job.company.display_name += ",";
-    } else {
-        job.company.display_name = ""; 
-    }
+    // if (job.company.display_name) { 
+    //     // add comma
+    //     job.company.display_name += ",";
+    // } else {
+    //     job.company.display_name = ""; 
+    // }
+
     //format location
     if (!job.location.area[1]) { job.location.area[1] = ""; }
     // format salary no.

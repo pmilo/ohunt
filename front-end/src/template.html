@@ -9,21 +9,21 @@
 </head>
 <body>
     <div class="site-container">
+        <div class="banner">
+            <img src="./assets/ohunt-logo1.png" alt="occuhunt logo">
+        </div>
         <header>
-            <!-- <div class="logo">
-                <img src="" alt="">
-            </div>  -->
             <div class="search-wrapper">
                 <form action="" class="search-form" id="search-form">
                     <div class="search-col-1 search-col">
                         <label for="search">What</label>
                         <span class="input-desc">Job title or keywords...</span>
-                        <input type="text" class="form-control" placeholder="Full Stack Developer" id="search">
+                        <input type="text" class="form-control" placeholder="" id="search">
                     </div>
                     <div class="search-col-2 search-col">
                         <label for="search">Where</label>
                         <span class="input-desc">City or state...</span>
-                        <input type="text" class="form-control" placeholder="London" id="location">
+                        <input type="text" class="form-control" placeholder="" id="location">
                     </div>
                     <div class="search-col-3 search-col">
                         <button class="search-btn">find jobs</button>
@@ -33,33 +33,32 @@
         </header>
         <main>
             <div class="pane-container">
-                <!-- <div class="sresults-wrapper pwrapper"> -->
-                    
-                    <nav class="main-nav">
-                        <div class="main-nav-wrapper">
-
-                            <div class="main-nav-row results">
-                                <span class="heading"><i class="fas fa-search"></i>Results</span>
-                                <span class="count"></span>
-                            </div>
-
-                            <div class="main-nav-row saved-jobs">
-                                <span class="heading"><i class="far fa-star"></i>Saved Jobs</span>
-                                <span class="count"></span>
-                            </div>
-                    
-                            <div class="main-nav-row applied">
-                                <span class="heading"><i class="fas fa-check"></i>Applied</span>
-                                <span class="count"></span>
-                            </div>
-                    
-                            <div class="main-nav-row archived">
-                                <span class="heading"><i class="far fa-folder"></i>Archived Jobs</span>
-                                <span class="count"></span>
-                            </div>
-
+                <nav class="main-nav">
+                    <div class="main-nav-wrapper">
+    
+                        <div class="main-nav-row results">
+                            <span class="heading"><i class="fas fa-search"></i>Results</span>
+                            <span class="count"></span>
                         </div>
-                    </nav>
+    
+                        <div class="main-nav-row saved-jobs">
+                            <span class="heading"><i class="far fa-star"></i>Saved Jobs</span>
+                            <span class="count"></span>
+                        </div>
+                
+                        <div class="main-nav-row applied">
+                            <span class="heading"><i class="fas fa-check"></i>Applied</span>
+                            <span class="count"></span>
+                        </div>
+                
+                        <div class="main-nav-row archived">
+                            <span class="heading"><i class="far fa-folder"></i>Archived Jobs</span>
+                            <span class="count"></span>
+                        </div>
+    
+                    </div>
+                </nav>
+                    
 
                     <div class="loading-element hide">
                         <span class="spinner">
@@ -70,7 +69,7 @@
 
                     <div class="search-results">
 
-                        <div class="sresults-row">
+                        <!-- <div class="sresults-row">
                             <span class="c-logo logo">
                                 <img src="./assets/ohunt-logo2.png" alt="logo">
                             </span>
@@ -131,12 +130,11 @@
                                 </span>
                                 <span class="days">25 days ago</span>
                             </div>  
-                        </div>
+                        </div> -->
 
 
                         
                     </div>
-                <!-- </div> -->
                 <!-- <div class="preview-wrapper pwrapper"> -->
                     <div class="preview flex-item">
                         <div class="preview-header">
@@ -157,8 +155,8 @@
                                 <div class="main-row">
 
                                     <span class="comp-location">
-                                        <span class="company">Amazon -</span>
-                                        <span class="location">London</span>
+                                        <span class="company">Amazon</span >
+                                        <span class="location">– London</span>
                                     </span>
                                     <span class="posted">Posted: 2020-05-18</span>
 
@@ -185,9 +183,14 @@
                 <!-- </div> -->
             </div>
         </main>
-        <!-- <script src="./app.js"></script>
-        <script src="./Models/JobSearch.js"></script>
-        <script src="./Views/jobSearchView.js"></script> -->
+        <footer>
+            <div class="footer-container">
+                <div class="footer-row">
+                    <img src="./assets/occuhunt-1-bw.png" alt="">
+                    <span class="copyright">© 2020 by Pierluigi Milo</span>
+                </div>  
+            </div>
+        </footer>
 
     </div><!-- ./body-container -->
     

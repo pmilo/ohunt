@@ -6,9 +6,11 @@ import * as navView from './Views/navView';
 import { elements, domStrings } from './Views/base';
 
 
-//TODO: Indeed job search API integration / Adzuna plan upgrade
+//TODO: Indeed job search API integration / Adzuna plan upgrade - full job desc not yet available.
 
-//TODO: add default occuhunt logo for unsucessfull company/logo clearbit match
+//TODO:// create func to calculate days posted
+
+//TODO:// wrap sresults job title instead of obj formatting in js;
 
 //TODO: redesign job preview pane
 
@@ -18,13 +20,18 @@ import { elements, domStrings } from './Views/base';
 
 //TODO: create add to job obj & add state/local storage click event for +note btns
 
-//TODO: finish sresults job formatting
+//TODO: finish sresults no jobs formatting
 
 //TODO: remove archived jobs from state.results before rendering @findbtn listener
 
 //TODO: push input search criteria to state with a unique id
 
+//TODO: add up/down arrow indicator on sresults hover
 
+//TODO: add search history component
+    // add click event to trigger search with rendered search history data
+
+//TODO: fix bad logo match with no company name
 
 
 // =============================================================================

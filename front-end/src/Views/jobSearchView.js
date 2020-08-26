@@ -36,7 +36,7 @@ export const renderJob = (job, currency, type) => {
     <button class="note-btn btn" title="Add Note">+ Note</button>
     <button class="archive-btn btn ${archivedJob ? 'selected' : ''}" title="Not Interested">&times</button>
     </span>
-    <span class="days">1 day ago</span>
+    <span class="days">${calcDaysAgo(job.created)}</span>
     </div>  
     </div>
     `;
@@ -87,11 +87,24 @@ export const renderJob = (job, currency, type) => {
     previewCompany.innerHTML = `${company.display_name ? company.display_name : 'Company not specified' }`;
     previewLogo.src = `${logo ? logo : "imgs/ohunt-logo2.8b89ae493ac6525c8a06fd4fe23106c1.png"}`;
     previewLocation.innerHTML = ` – ${location.area[1]}`
-    posted.innerHTML = created;
+    posted.innerHTML = calcDaysAgo(created);
     previewTxt.innerHTML = description;
     viewBtnHref.href = redirect_url;
     
     
+}
+
+const calcDaysAgo = datePosted => {
+    //split date str
+    const [ year, month, day ] = datePosted.split('-');
+    let start = new Date(`${month} ${day}, ${year}`),
+        end = new Date(), //current date
+        days = 1000 * 60 * 60 *24,
+        diff = end - start,
+        result = Math.floor(diff / days);
+
+    const posted = `${result < 1 ? 'Today' : result + ' days ago' }`;
+    return posted;
 }
 
 const formatSalary = number => {
@@ -113,7 +126,13 @@ const formatTitle = (str, limit) => {
     return newStr;
 }
 
+const formatCreated = date => {
+    const dateStr = date.split('T')[0];
+    return dateStr;
+}
+
 export const formatJob = job => {
+
     // format job title
     const charLimit = 27;
     if (job.title) { 
@@ -138,7 +157,10 @@ export const formatJob = job => {
     if (!job.location.area[1]) { job.location.area[1] = ""; }
     // format salary no.
     job.salary_max = formatSalary(job.salary_max).toString();
- 
+
+    //format date posted
+    job.created = formatCreated(job.created);
+
     return job;
 }
 
@@ -224,6 +246,8 @@ export const saveJobBtnListener = type => {
             //look for selected job in state.saved & return
             const savedJob = state.JobSearch.getJob(state.saved, id);
 
+            const previewID = document.querySelector('.preview-header');
+
             if (!savedJob) {
                 // add job to state
                 state.JobSearch.addJob(jobMatch, id, "saved");
@@ -241,8 +265,12 @@ export const saveJobBtnListener = type => {
 
                 } else if (saveBtnType === "row") {
                     // update preview btn class
-                    elements.previewSaveBtn.classList.add("selected");
-                    elements.previewSaveBtn.textContent = "Saved";
+
+                    //check if job id matches preview dataset.id before styling preview btn
+                    if (id === previewID.dataset.id) {
+                        elements.previewSaveBtn.classList.add("selected");
+                        elements.previewSaveBtn.textContent = "Saved";
+                    }
                 }
 
                 // add selected class
@@ -263,10 +291,12 @@ export const saveJobBtnListener = type => {
                 //remove job row save btn styling if preview save btn used
                 if (saveBtnType === "preview") { 
                     document.querySelector(`[data-id="${id}"] .watch-btn`).classList.remove("selected"); 
-                    document.querySelector(`[data-id="${id}"] .watch-btn`).textContent = "Save Job";
+                    document.querySelector(`[data-id="${id}"] .watch-btn`).textContent = "Save Job";   
                 } else if (saveBtnType === "row") {
-                    elements.previewSaveBtn.classList.remove("selected");
-                    elements.previewSaveBtn.textContent = "Save Job";
+                    if (id === previewID.dataset.id) {  
+                        elements.previewSaveBtn.classList.remove("selected");
+                        elements.previewSaveBtn.textContent = "Save Job";
+                    }
                 }
             }
         }, true);
@@ -275,7 +305,6 @@ export const saveJobBtnListener = type => {
 
 
 
-//TODO: set up archived listener
 
 export const archiveBtnListener = () => {
     const archiveBtns = [...document.querySelectorAll(domStrings.archiveBtns)];

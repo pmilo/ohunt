@@ -44,9 +44,9 @@ export const navRowListener = row => {
         }).join('');
 
         if (!markup && type == "results") {
-            markup = "No search results!";
+            markup = `<div class="sresults-desc"><i class="fas fa-exclamation"></i>&nbsp;&nbsp;Use the Occuhunt search engine to find jobs.</div>`;
         } else if (!markup) {
-            markup = `No ${type} jobs!`;
+            markup = `<div class="sresults-desc"><i class="fas fa-exclamation"></i>&nbsp;&nbsp;You have no ${type} jobs.</div>`;
         }
 
 

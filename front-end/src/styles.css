@@ -307,6 +307,12 @@ label {
     /* border-left: 1px solid #f6584a1e; */
 }
 
+.sresults-desc {
+    padding: 1.5em;
+    font-size: .8rem;
+    color: #f6584a81;
+}
+
 .sresults-row { 
     max-width: 410px;
     min-width: 410px;
@@ -533,6 +539,15 @@ label {
 .main-row {
     display: flex;
     justify-content: space-between;
+}
+
+.posted-row {
+    color: rgb(119, 119, 119);
+    font-size: .9rem;
+}
+
+.posted-row i {
+    margin-right: .15em;
 }
 
 .span-txt {

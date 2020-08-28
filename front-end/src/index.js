@@ -8,19 +8,15 @@ import { elements, domStrings } from './Views/base';
 
 //TODO: Indeed job search API integration / Adzuna plan upgrade - full job desc not yet available.
 
-//TODO:// create func to calculate days posted
-
-//TODO:// wrap sresults job title instead of obj formatting in js;
-
 //TODO: redesign job preview pane
 
 //TODO: add tool tip for job boards w/ option to ok/x/remove - remember interaction; copy to state/local storage: { state.board - tool_tip: true/false }
 
-//TODO: wrap all listner functions into one func to invoke when rendering job rows
-
-//TODO: create add to job obj & add state/local storage click event for +note btns
-
-//TODO: finish sresults no jobs formatting
+//TODO: Add Notes feature
+        // design notes component
+        // add notes obj/array to job obj
+        // add notes render
+        // add +note btn listener
 
 //TODO: remove archived jobs from state.results before rendering @findbtn listener
 
@@ -29,7 +25,10 @@ import { elements, domStrings } from './Views/base';
 //TODO: add up/down arrow indicator on sresults hover
 
 //TODO: add search history component
-    // add click event to trigger search with rendered search history data
+        // design search history component
+        // add search history data to state & local storage
+        // search history render
+        // add click event to trigger search with rendered search history data
 
 //TODO: fix bad logo match with no company name
 
@@ -43,11 +42,6 @@ const state = {
     results: {},
     saved: {},
     archived: {},
-    viewed: {},
-    applied: {    
-        id: "",
-        job: {}
-    }
 };
 
 window.state = state;
@@ -113,8 +107,6 @@ const controlSearch = async ()  => {
 
     for (let [key, value] of Object.entries(state.results)) { 
         if (key) { 
-            // console.log('value');
-            // console.log(value);
             resultsArr.push(value);
         } 
     }
@@ -141,12 +133,29 @@ const controlSearch = async ()  => {
     // if error, stop loading animation    
 }
 
+
+
+
+// run a default search
+controlSearch().then(() => {
+    // show preview
+    elements.previewHeader.classList.remove('no-display');
+    elements.previewBody.classList.remove('no-display');
+    //get first key of state.results
+    const key = Object.keys(state.results)[0];
+    // apply selected class to results nav
+    elements.navRowResults.classList.add('selected-nav');
+    // update preview with first state.results object
+    jobSearchView.updatePreview(state.results[key], '£', elements);
+
+    }
+)
+
 // add event listener
 state.JobSearch.findBtn.addEventListener('click', e => {
     e.preventDefault();
     controlSearch();
 });
-
 
 
 
@@ -161,15 +170,6 @@ const controlSresults = () => {
     jobSearchView.archiveBtnListener();
 }
 
-// =============================================================================
-// JOB CONTROLLER
-// =============================================================================
-
-// get jobs from seatch results & convert to array
-
-//loop through sresults array & attach event listener(s)
-
-
 
 // =============================================================================
 // NAV CONTROLLER
@@ -180,9 +180,3 @@ const controlNav = () => {
     })
 }
 controlNav();
-
-// =============================================================================
-// APPLIED CONTROLLER
-// =============================================================================
-
-

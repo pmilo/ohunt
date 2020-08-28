@@ -3,8 +3,6 @@ import { elements, domStrings } from './base';
 import * as jobSearchView from './jobSearchView';
 import * as navView from './navView';
 
-//TODO: remove remove job row when unsaving with preview or jrow save btns
-
 //TODO: create render tool-tip overlay function for job boards to highlight purpose/function. 
 
 
@@ -36,6 +34,7 @@ export const renderJob = (job, currency, type) => {
     <button class="note-btn btn" title="Add Note">+ Note</button>
     <button class="archive-btn btn ${archivedJob ? 'selected' : ''}" title="Not Interested">&times</button>
     </span>
+    
     <span class="days">${calcDaysAgo(job.created)}</span>
     </div>  
     </div>
@@ -86,7 +85,7 @@ export const renderJob = (job, currency, type) => {
     previewTitle.innerHTML = title;
     previewCompany.innerHTML = `${company.display_name ? company.display_name : 'Company not specified' }`;
     previewLogo.src = `${logo ? logo : "imgs/ohunt-logo2.8b89ae493ac6525c8a06fd4fe23106c1.png"}`;
-    previewLocation.innerHTML = ` – ${location.area[1]}`
+    previewLocation.innerHTML = ` – ${ location.area[1] ? location.area[1] : 'Location not specified' }`;
     posted.innerHTML = calcDaysAgo(created);
     previewTxt.innerHTML = description;
     viewBtnHref.href = redirect_url;
@@ -134,18 +133,17 @@ const formatCreated = date => {
 export const formatJob = job => {
 
     // format job title
-    const charLimit = 27;
+
+    // const charLimit = 27;
     if (job.title) { 
         // remove html markup 
-        job.title = job.title.replace(/<\/?[^>]+(>|$)/g, "")
-        
-        //TODO: create new propery to assign shortened job title - retain full title for job spec @ preview.
+        job.title = job.title.replace(/<\/?[^>]+(>|$)/g, "")      
 
-        //apply character limit 
-        if (job.title.length > charLimit) {job.title = formatTitle(job.title, charLimit); }
+        // apply character limit 
+        // if (job.title.length > charLimit) {job.title = formatTitle(job.title, charLimit); }
     }
     
-    //format company
+    // format company
     // if (job.company.display_name) { 
     //     // add comma
     //     job.company.display_name += ",";
@@ -153,12 +151,12 @@ export const formatJob = job => {
     //     job.company.display_name = ""; 
     // }
 
-    //format location
+    // format location
     if (!job.location.area[1]) { job.location.area[1] = ""; }
     // format salary no.
     job.salary_max = formatSalary(job.salary_max).toString();
 
-    //format date posted
+    // format date posted
     job.created = formatCreated(job.created);
 
     return job;
@@ -231,14 +229,14 @@ export const saveJobBtnListener = type => {
                 let el = document.querySelector(domStrings.previewHeader);
                 id = el.dataset.id;
                 saveBtnType = "preview";
-                console.log('preview id');
-                console.log(id);
+                // console.log('preview id');
+                // console.log(id);
             } else {
                 // get id from job row dataset
                 id = e.currentTarget.offsetParent.dataset.id;
                 saveBtnType = "row";
-                console.log('job row id');
-                console.log(id);
+                // console.log('job row id');
+                // console.log(id);
             }
 
             //look for selected job in state.results & return

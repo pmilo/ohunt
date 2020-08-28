@@ -1,6 +1,7 @@
 export const elements = {
     sresults: document.querySelector('.search-results'),
     navRows: document.querySelectorAll('.main-nav-row'),
+    navRowResults: document.querySelector('.main-nav-row.results'),
     resultsNav: document.querySelector('.results .count'),
     savedJobsNav: document.querySelector('.saved-jobs .count'),
     appliedNav: document.querySelector('.applied .count'),

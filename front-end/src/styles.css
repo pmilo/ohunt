@@ -60,7 +60,8 @@ body {
 
 .banner img {
     max-width: 100px;
-    margin-left: 30.5em;
+    margin-left: 2em;
+    /* margin-left: 5%; */
     margin-top: .6em;
 }
 
@@ -199,11 +200,18 @@ label {
 
 .main-nav-row:hover {
     color: #0084ff;
+    /* background-color: #EFF0F1; */
+    /* font-weight: bold; */
+    /* border-color: var(--signature); */
+    /* border-right: 4px solid var(--signature); */
+    /* color: #fff; */
+}
+
+.selected-nav {
+    color: #0084ff;
     background-color: #EFF0F1;
     font-weight: bold;
-    /* border-color: var(--signature); */
     border-right: 4px solid var(--signature);
-    /* color: #fff; */
 }
 
 .heading i {
@@ -218,6 +226,10 @@ label {
 }
 
 .applied {
+    display: none;
+}
+
+.no-display {
     display: none;
 }
 
@@ -356,7 +368,7 @@ label {
 
 .days {
     font-size: .75rem;
-    color: rgb(119, 119, 119);
+    color: rgb(151, 151, 151);
 }
 
 .btn {
@@ -429,6 +441,7 @@ label {
 
 .role {
     font-weight: bold;
+    max-width: 240px;
 }
 
 .selected {
@@ -478,6 +491,13 @@ label {
 .preview-body {
     height: 100%; 
     position: relative;
+    padding-top: 1.5em;
+    font-size: 1rem;
+}
+
+.preview-txt {
+    margin-bottom: 2.5em;
+    font-size: .95rem;
 }
 
 .job-logo {
@@ -502,11 +522,11 @@ label {
     margin-bottom: .8em;
 }
 
-.view-btn-row {
+/* .view-btn-row {
     position: absolute;
     top: 460px;
     left: 208px;
-}
+} */
 
 .btn-view {
     padding: .5em .6em;
@@ -522,6 +542,7 @@ label {
 .job-title {
     font-size: 1.5rem;
     font-weight: 600;
+    max-width: 320px;
 }
 
 .overview-title {
@@ -539,10 +560,11 @@ label {
 .main-row {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1em;
 }
 
 .posted-row {
-    color: rgb(119, 119, 119);
+    color: rgb(151, 151, 151);
     font-size: .9rem;
 }
 
@@ -557,8 +579,9 @@ label {
 .icon-span {
     display: flex;
     justify-content: flex-end;
-    /* width: 30%; */
+    max-height: 32px;
 }
+
 
 .i-wrapper {
     width: 36px;
@@ -583,11 +606,6 @@ label {
     margin-bottom: 2em;
 }
 
-.preview-body {
-    padding-top: 1.5em;
-    font-size: 1rem;
-}
-
 
 /* ========================================================================== */
 /* FOOTER */
@@ -601,7 +619,8 @@ footer {
 .footer-container {
     height: 100%;
     width: 61.8%;
-    margin: 0 auto;
+    margin-left: 2em;
+    /* margin: 0 auto; */
 }
 
 .footer-container img {

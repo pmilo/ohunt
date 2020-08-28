@@ -100,22 +100,6 @@ export default class JobSearch {
        }
     }
 
-    // addProp(job, type){
-    //     // add prop to job
-    //     job[type] = true;
-
-    //     // return job
-    //     return job;
-    // }
-
-    // removeProp(job, type){
-    //     // set job type prop to false
-    //     job[type] = false;
-
-    //     //return job
-    //     return job;
-    // }
-
     addJob(job, id, objStr) {
         // take copy of state
         const copy = { ...state[objStr] };

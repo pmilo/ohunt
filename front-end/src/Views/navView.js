@@ -10,6 +10,10 @@ import { elements, domStrings } from './base';
 
 export const navRowListener = row => {
     row.addEventListener('click', e => {
+        // remove selected nav styling
+        document.querySelector('.selected-nav').classList.remove('selected-nav');
+        // apply active styling to target
+        e.currentTarget.classList.add('selected-nav');
         
         // type must match state obj's name
         let type = e.currentTarget.firstElementChild.textContent
@@ -24,8 +28,6 @@ export const navRowListener = row => {
         
         // clear search results
         jobSearchView.clearSearchResults();
-
-        //TODO: clear preview pane
 
         // TODO: add laoding saved jobs animation
 
@@ -44,7 +46,7 @@ export const navRowListener = row => {
         }).join('');
 
         if (!markup && type == "results") {
-            markup = `<div class="sresults-desc"><i class="fas fa-exclamation"></i>&nbsp;&nbsp;Use the Occuhunt search engine to find jobs.</div>`;
+            markup = `<div class="sresults-desc"><i class="fas fa-info"></i>&nbsp;&nbsp;Use the Occuhunt search engine to find jobs.</div>`;
         } else if (!markup) {
             markup = `<div class="sresults-desc"><i class="fas fa-exclamation"></i>&nbsp;&nbsp;You have no ${type} jobs.</div>`;
         }

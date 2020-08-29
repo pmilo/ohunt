@@ -13,7 +13,10 @@ export const renderJob = (job, currency, type) => {
     
     const jobMatch = state.JobSearch.getJob(state.saved, job.id);
     const archivedJob = state.JobSearch.getJob(state.archived, job.id);
-    
+
+    console.log(job.title);
+    console.log(job.logo);
+
     let markup =  `
     
     <div class="sresults-row" data-id=${job.id}>

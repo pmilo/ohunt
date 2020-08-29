@@ -25,7 +25,7 @@ export default class JobSearch {
 
         const res = await fetch(`https://autocomplete.clearbit.com/v1/companies/suggest?query=:${job.company.display_name}`)
         const json = await res.json();
-      
+        
         try {   
                 if (json.length >= 1) {
                     job.name = json[0].name;
@@ -36,16 +36,19 @@ export default class JobSearch {
         } catch(error) {
             alert(error);
         }
-        
     };
 
 
     async addCompanyData(resultsArr) {
         for (const job of resultsArr) {
-            // get company data, add to job obj & return
-           const newJob = await state.JobSearch.getCompanyData(job); 
-           // overwrite existing job in state.results with updated job obj
-           state.results[`job-${job.id}`] = newJob;  
+
+            if (job.company.display_name) {
+                 // get company data, add to job obj & return
+                const newJob = await state.JobSearch.getCompanyData(job); 
+                // overwrite existing job in state.results with updated job obj
+                state.results[`job-${job.id}`] = newJob;
+            }
+             
         }
     }
 

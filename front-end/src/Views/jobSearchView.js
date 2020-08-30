@@ -3,19 +3,11 @@ import { elements, domStrings } from './base';
 import * as jobSearchView from './jobSearchView';
 import * as navView from './navView';
 
-//TODO: create render tool-tip overlay function for job boards to highlight purpose/function. 
-
 
 export const renderJob = (job, currency, type) => { 
-    // const { id, title, company, location, salary_max} = job;
-    
-    //TODO: assign full job title string to span titie attr - func
     
     const jobMatch = state.JobSearch.getJob(state.saved, job.id);
     const archivedJob = state.JobSearch.getJob(state.archived, job.id);
-
-    console.log(job.title);
-    console.log(job.logo);
 
     let markup =  `
     
@@ -51,8 +43,6 @@ export const renderJob = (job, currency, type) => {
     return markup
         
 }
-    
-    //TODO: create preview render function to clear/reinstate preview pane when switching job boards - this will resolve bug with savebtn listener 
     
     export const removeJobRow = id => {
         let element = document.querySelector(`[data-id="${id}"]`);

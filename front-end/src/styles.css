@@ -193,6 +193,7 @@ label {
     color: #494949;
     width: 100%;
     padding: .4em .7em;
+    border-radius: 3px;
 
     display: flex;
     justify-content: space-between;

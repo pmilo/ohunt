@@ -6,11 +6,9 @@ import * as navView from './Views/navView';
 import { elements, domStrings } from './Views/base';
 
 
-//TODO: Indeed job search API integration / Adzuna plan upgrade - full job desc not yet available.
+//TODO: Indeed job search API integration / Adzuna API plan upgrade - !full job desc not yet available.
 
-//TODO: redesign job preview pane
-
-//TODO: add tool tip for job boards w/ option to ok/x/remove - remember interaction; copy to state/local storage: { state.board - tool_tip: true/false }
+//TODO: add tool tip for job boards to highlight purpose/function w/ option to ok/x - remember interaction; copy to state/local storage: { state.board - tool_tip: true/false }
 
 //TODO: Add Notes feature
         // design notes component
@@ -30,7 +28,9 @@ import { elements, domStrings } from './Views/base';
         // search history render
         // add click event to trigger search with rendered search history data
 
-//TODO: fix bad logo match with no company name
+//TODO: add error handling for NaN/min_salary data
+
+//TODO: clear/reset preview component when switching job boards
 
 
 // =============================================================================
@@ -47,11 +47,11 @@ const state = {
 window.state = state;
 
 window.addEventListener('load', () => {
-    // Restore likes
+    // Restore saved/archived jobs from local storage
     state.JobSearch.readLocalStorage(state);
-
+    
+    //TODO: make func. dynamic to update all nav/state types
     // update nav count
-    //TODO: make func dynamic to update all nav/state types
     jobSearchView.updateNavJobCount(elements.savedJobsNav, state.saved);  
     jobSearchView.updateNavJobCount(elements.archivedNav, state.archived);
 });
@@ -64,14 +64,11 @@ window.addEventListener('load', () => {
 
 state.JobSearch = new JobSearch('#search-form', '.search-results', '.loading-element', '.search-btn');
 
-// set country code
+// set country code -- defaulted to GB
 state.JobSearch.setCountryCode();
 
-// add search listener
 
 const controlSearch = async ()  => {
-
-    //TODO: clear preview pane
 
     // clear state.results
     state.results = {};
@@ -99,7 +96,7 @@ const controlSearch = async ()  => {
     // remove loading animation
     jobSearchView.stopLoading();
 
-    // add clearbit company data to results & copy to state.results.
+    // add clearbit company data to results & copy to state.results
     await state.JobSearch.addCompanyData(results);          
     
     //convert state.results to iterable array
@@ -110,10 +107,10 @@ const controlSearch = async ()  => {
             resultsArr.push(value);
         } 
     }
-    console.log('resultsArr');
-    console.log(resultsArr);
+    // console.log('resultsArr');
+    // console.log(resultsArr);
     
-    // build & render job(s) markup
+    // build & render job/s markup
     const resultsStr = resultsArr.map(job =>                 
         jobSearchView.renderJob(jobSearchView.formatJob(job), state.JobSearch.currencySymbol)
     )
@@ -124,19 +121,15 @@ const controlSearch = async ()  => {
     state.JobSearch.resultsContainer.innerHTML = resultsStr;
     state.JobSearch.resultsContainer.style.overflow = "scroll";
     
-    // add search results listeners
+    // init. search results listeners
     controlSresults();
 
     // update results nav count
-    jobSearchView.updateNavJobCount(elements.resultsNav, state.results);
-
-    // if error, stop loading animation    
+    jobSearchView.updateNavJobCount(elements.resultsNav, state.results);  
 }
 
 
-
-
-// run a default search
+// run default search to populate search results on page load
 controlSearch().then(() => {
     // show preview
     elements.previewHeader.classList.remove('no-display');
@@ -147,24 +140,23 @@ controlSearch().then(() => {
     elements.navRowResults.classList.add('selected-nav');
     // update preview with first state.results object
     jobSearchView.updatePreview(state.results[key], '£', elements);
-
     }
 )
 
-// add event listener
+// add search/find jobs event listener
 state.JobSearch.findBtn.addEventListener('click', e => {
     e.preventDefault();
+    // init.
     controlSearch();
 });
-
 
 
 // =============================================================================
 // SEARCH RESULTS CONTROLLER
 // =============================================================================
 
+// add search results event listeners
 const controlSresults = () => {
-    //JOB ROW listener
     jobSearchView.jobRowListener("results");
     jobSearchView.saveJobBtnListener();
     jobSearchView.archiveBtnListener();
@@ -174,9 +166,12 @@ const controlSresults = () => {
 // =============================================================================
 // NAV CONTROLLER
 // =============================================================================
+
+// add navigation event listeners
 const controlNav = () => {
     elements.navRows.forEach(row => {
         navView.navRowListener(row);
     })
 }
+//init.
 controlNav();

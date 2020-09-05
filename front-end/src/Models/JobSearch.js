@@ -48,7 +48,6 @@ export default class JobSearch {
                 // overwrite existing job in state.results with updated job obj
                 state.results[`job-${job.id}`] = newJob;
             }
-             
         }
     }
 

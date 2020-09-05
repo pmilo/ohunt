@@ -6,8 +6,8 @@ const config = require('./config');
 
 const headers = {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Methods': 'GET',
+    'Access-Control-Allow-Origin': 'http://occuhunt.com',
+    'Access-Control-Methods': 'GET, POST, OPTIONS',
 };
 
 // ?search=php&location=london

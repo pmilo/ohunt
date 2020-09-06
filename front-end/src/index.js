@@ -82,7 +82,7 @@ const controlSearch = async ()  => {
     // get search & location input field values
     const { search, location } = state.JobSearch.extractFormData(state.JobSearch.searchForm);
     // build url 
-    const targetURL = `http://localhost:5000/?search=${search}&location=${location}&country=${state.JobSearch.countryCode}`;
+    const targetURL = `http://occuhunt.com:5000/?search=${search}&location=${location}&country=${state.JobSearch.countryCode}`;
   
     // fetch API for search results
     let results;
